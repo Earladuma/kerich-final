@@ -1,0 +1,36 @@
+# Dependencies
+node_modules/
+
+# Environment — NEVER commit
+.env
+.env.local
+.env.*.local
+
+# Firebase service account — NEVER commit
+config/serviceAccountKey.json
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Build / dist
+dist/
+build/
+
+# Uploads (temp local files)
+uploads/
+
+# OS
+.DS_Store
+Thumbbs.db
+
+# Editor
+.vscode/
+.idea/
+
+# Firebase
+.firebase/
+serviceAccountKey.json
+*.json
+.env

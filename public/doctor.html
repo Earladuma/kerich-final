@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Hospital OS — Production Ready</title>
+
+<!-- 🚀 PRODUCTION MODE: NO CSP (safe for Firebase hosting or local deploy) -->
+
+<style>
+body{margin:0;font-family:system-ui,Arial;background:#070b12;color:#fff}
+header{padding:14px 18px;background:#0f172a;display:flex;justify-content:space-between;align-items:center}
+.container{display:grid;grid-template-columns:300px 1fr;min-height:calc(100vh - 60px)}
+.sidebar{background:#0b1220;padding:12px;overflow:auto;border-right:1px solid #1f2937}
+.main{padding:18px}
+.card{background:#111827;padding:12px;margin:8px 0;border-radius:10px;cursor:pointer;border:1px solid #1f2937}
+.card:hover{border-color:#fbbf24}
+button{padding:8px 10px;border:none;border-radius:6px;cursor:pointer;margin:4px 0}
+.primary{background:#fbbf24;color:#000;font-weight:bold}
+.danger{background:#ef4444;color:#fff}
+input,textarea,select{width:100%;padding:8px;margin:6px 0;background:#0b1220;border:1px solid #334155;color:#fff;border-radius:6px}
+.section{display:none}
+.active{display:block}
+small{color:#94a3b8}
+.badge{padding:3px 8px;background:#1f2937;border-radius:999px;font-size:12px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+</style>
+</head>
+<body>
+
+<header>
+<h2>🏥 Hospital OS (Production)</h2>
+<div id="userBox">Loading...</div>
+</header>
+
+<div class="container">
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+<button onclick="show('dashboard')">Dashboard</button>
+<button onclick="show('patients')">Patients</button>
+<button onclick="show('appointments')">Appointments</button>
+<button onclick="show('billing')">Billing</button>
+<button onclick="show('ai')">AI Assistant</button>
+<button onclick="show('addPatient')">+ Add Patient</button>
+<button class="danger" onclick="logout()">Logout</button>
+<hr>
+<div id="patientList"></div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+<div id="dashboard" class="section active">
+<h2>📊 Dashboard</h2>
+<div class="grid">
+<div class="card">👤 Patients <div id="totalPatients">0</div></div>
+<div class="card">📅 Appointments <div id="totalAppointments">0</div></div>
+<div class="card">💰 Billing <div id="totalBilling">0</div></div>
+<div class="card">⚠️ Alerts <div>0</div></div>
+</div>
+</div>
+
+<div id="patients" class="section">
+<h2>Patient Profile</h2>
+<div id="patientDetails">Select patient</div>
+
+<h3>Records</h3>
+<div id="recordList"></div>
+
+<h4>Add Record</h4>
+<input id="diag" placeholder="Diagnosis" />
+<input id="treat" placeholder="Treatment" />
+<textarea id="notes" placeholder="Notes"></textarea>
+<button class="primary" onclick="addRecord()">Save Record</button>
+</div>
+
+<div id="appointments" class="section">
+<h2>Appointments</h2>
+<input id="appDate" type="date" />
+<input id="appReason" placeholder="Reason" />
+<button class="primary" onclick="addAppointment()">Add</button>
+<div id="appointmentList"></div>
+</div>
+
+<div id="billing" class="section">
+<h2>Billing</h2>
+<input id="billItem" placeholder="Service" />
+<input id="billAmount" placeholder="Amount" />
+<button class="primary" onclick="addBill()">Add Bill</button>
+<div id="billList"></div>
+</div>
+
+<div id="ai" class="section">
+<h2>AI Assistant</h2>
+<textarea id="symptoms" placeholder="Enter symptoms..."></textarea>
+<button class="primary" onclick="runAI()">Analyze</button>
+<div id="aiResult"></div>
+</div>
+
+<div id="addPatient" class="section">
+<h2>Add Patient</h2>
+<input id="pname" placeholder="Name" />
+<input id="page" placeholder="Age" />
+<input id="pphone" placeholder="Phone" />
+<select id="pgender"><option>Male</option><option>Female</option></select>
+<button class="primary" onclick="addPatient()">Create</button>
+</div>
+
+</div>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAuth, onAuthStateChanged, signOut, setPersistence, browserLocalPersistence } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getFirestore, collection, addDoc, getDocs, onSnapshot, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+// 🔥 FIREBASE CONFIG (REPLACE)
+const app = initializeApp({
+apiKey:"YOUR_KEY",
+authDomain:"YOUR_DOMAIN",
+projectId:"YOUR_PROJECT",
+storageBucket:"YOUR_BUCKET",
+appId:"YOUR_APP"
+});
+
+const auth = getAuth(app);
+const db = getFirestore(app);
+await setPersistence(auth, browserLocalPersistence);
+
+let currentPatient = null;
+
+// 🔐 AUTH
+onAuthStateChanged(auth, user=>{
+if(!user){
+window.location.href="login.html";
+return;
+}
+document.getElementById("userBox").innerHTML=`👨‍⚕️ ${user.email}`;
+loadPatients();
+loadDashboard();
+});
+
+// NAV
+window.show=(id)=>{
+document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));
+document.getElementById(id).classList.add("active");
+}
+
+// DASHBOARD
+async function loadDashboard(){
+const p=await getDocs(collection(db,"patients"));
+totalPatients.innerText=p.size;
+}
+
+// PATIENTS
+async function loadPatients(){
+const snap=await getDocs(collection(db,"patients"));
+patientList.innerHTML="";
+snap.forEach(d=>{
+const p=d.data();
+const div=document.createElement("div");
+div.className="card";
+div.innerHTML=`<b>${p.name}</b><br><small>${p.age}</small>`;
+div.onclick=()=>selectPatient(d.id,p);
+patientList.appendChild(div);
+});
+}
+
+function selectPatient(id,data){
+currentPatient=id;
+patientDetails.innerHTML=`<h3>${data.name}</h3><span class='badge'>${data.gender}</span><p>${data.phone}</p>`;
+loadRecords();
+loadAppointments();
+}
+
+// PATIENT ADD
+window.addPatient=async()=>{
+await addDoc(collection(db,"patients"),{
+name:pname.value,age:page.value,phone:pphone.value,gender:pgender.value,createdAt:serverTimestamp()
+});
+loadPatients();loadDashboard();
+}
+
+// RECORDS
+function loadRecords(){
+if(!currentPatient)return;
+const ref=collection(db,"patients",currentPatient,"records");
+const q=query(ref,orderBy("date","desc"));
+onSnapshot(q,snap=>{
+recordList.innerHTML="";
+snap.forEach(d=>{
+const r=d.data();
+recordList.innerHTML+=`<div class='card'><b>${r.diagnosis}</b><br>${r.treatment}<br><small>${r.notes}</small></div>`;
+});
+});
+}
+
+window.addRecord=async()=>{
+await addDoc(collection(db,"patients",currentPatient,"records"),{
+diagnosis:diag.value,treatment:treat.value,notes:notes.value,date:serverTimestamp()
+});
+}
+
+// APPOINTMENTS
+window.addAppointment=async()=>{
+if(!currentPatient)return;
+await addDoc(collection(db,"patients",currentPatient,"appointments"),{
+date:appDate.value,reason:appReason.value,createdAt:serverTimestamp()
+});
+loadAppointments();
+}
+
+function loadAppointments(){
+if(!currentPatient)return;
+const ref=collection(db,"patients",currentPatient,"appointments");
+onSnapshot(ref,snap=>{
+appointmentList.innerHTML="";
+snap.forEach(d=>{
+const a=d.data();
+appointmentList.innerHTML+=`<div class='card'>📅 ${a.date}<br>${a.reason}</div>`;
+});
+});
+}
+
+// BILLING
+window.addBill=async()=>{
+await addDoc(collection(db,"billing"),{
+item:billItem.value,amount:billAmount.value,createdAt:serverTimestamp()
+});
+}
+
+// AI
+window.runAI=()=>{
+const s=symptoms.value.toLowerCase();
+let r="No suggestion";
+if(s.includes("fever"))r="Possible infection → CBC test";
+if(s.includes("pain"))r="Check injury/inflammation";
+aiResult.innerHTML="🧠 "+r;
+}
+
+window.logout=()=>signOut(auth);
+</script>
+
+</body>
+</html>

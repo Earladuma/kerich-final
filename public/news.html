@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kerich News — Health Updates</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+body{
+  margin:0;
+  font-family:'DM Sans',sans-serif;
+  background:#0A0A0F;
+  color:#F5F0E8;
+}
+
+/* HEADER */
+.news-hero{
+  padding:80px 24px 40px;
+  text-align:center;
+}
+.news-hero h1{
+  font-family:'Cormorant Garamond',serif;
+  font-size:42px;
+}
+.news-hero p{
+  color:#B8B0A0;
+  margin-top:10px;
+}
+
+/* GRID */
+.news-container{
+  max-width:1100px;
+  margin:auto;
+  padding:20px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+
+/* CARD */
+.news-card{
+  background:#1C1C2A;
+  border-radius:12px;
+  overflow:hidden;
+  border:1px solid rgba(201,168,76,0.1);
+  transition:0.3s;
+}
+
+.news-card:hover{
+  transform:translateY(-5px);
+  border-color:rgba(201,168,76,0.4);
+  box-shadow:0 10px 30px rgba(201,168,76,0.1);
+}
+
+.news-card img{
+  width:100%;
+  height:180px;
+  object-fit:cover;
+}
+
+.news-content{
+  padding:16px;
+}
+
+.news-content h3{
+  font-size:15px;
+  margin-bottom:6px;
+}
+
+.news-content p{
+  font-size:13px;
+  color:#B8B0A0;
+  margin-bottom:10px;
+}
+
+.news-date{
+  font-size:11px;
+  color:#C9A84C;
+}
+
+/* BACK BUTTON */
+.back-btn{
+  position:fixed;
+  top:20px;
+  left:20px;
+  background:#1C1C2A;
+  border:1px solid rgba(201,168,76,0.2);
+  padding:8px 14px;
+  border-radius:8px;
+  color:#C9A84C;
+  cursor:pointer;
+  text-decoration:none;
+}
+
+.back-btn:hover{
+  background:rgba(201,168,76,0.1);
+}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .news-container{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:600px){
+  .news-container{grid-template-columns:1fr;}
+}
+</style>
+</head>
+
+<body>
+
+<a href="index.html" class="back-btn">← Back</a>
+
+<div class="news-hero">
+  <h1>Health News & Updates</h1>
+  <p>Stay informed with the latest in medicine, wellness, and healthcare.</p>
+</div>
+
+<div class="news-container">
+
+  <div class="news-card">
+    <img src="images/news1.jpg">
+    <div class="news-content">
+      <h3>Malaria Vaccine Expansion</h3>
+      <p>Kenya expands access to malaria vaccines nationwide.</p>
+      <div class="news-date">April 2026</div>
+    </div>
+  </div>
+
+  <div class="news-card">
+    <img src="images/news2.jpg">
+    <div class="news-content">
+      <h3>Flu Season Alert</h3>
+      <p>Doctors recommend early prevention measures.</p>
+      <div class="news-date">April 2026</div>
+    </div>
+  </div>
+
+  <div class="news-card">
+    <img src="images/news3.jpg">
+    <div class="news-content">
+      <h3>Lifestyle Diseases Rising</h3>
+      <p>Experts warn about increasing chronic conditions.</p>
+      <div class="news-date">March 2026</div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

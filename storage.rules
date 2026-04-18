@@ -1,0 +1,74 @@
+// storage.rules
+// ════════════════════════════════════════════════════════════════
+//  Kerich Pharmaceuticals — Firebase Storage Security Rules
+// ════════════════════════════════════════════════════════════════
+
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function uid() {
+      return request.auth.uid;
+    }
+
+    function role() {
+      return request.auth.token.kerich_role;
+    }
+
+    function isAdmin()      { return isAuthenticated() && role() == 'admin'; }
+    function isPharmacist() { return isAuthenticated() && (role() == 'pharmacist' || role() == 'admin'); }
+
+    function isValidImage() {
+      return request.resource.contentType.matches('image/.*')
+          || request.resource.contentType == 'application/pdf';
+    }
+
+    function isUnder10MB() {
+      return request.resource.size < 10 * 1024 * 1024;
+    }
+
+    // ── Prescription uploads ──────────────────────────────────
+    // Path: prescriptions/{userId}/{filename}
+    match /prescriptions/{userId}/{filename} {
+      // Patient uploads their own prescriptions only
+      allow write: if isAuthenticated()
+        && uid() == userId
+        && isValidImage()
+        && isUnder10MB();
+
+      // Patient reads own; pharmacist/admin reads any
+      allow read: if isAuthenticated()
+        && (uid() == userId || isPharmacist());
+    }
+
+    // ── Product images ────────────────────────────────────────
+    match /products/{imageId} {
+      allow read:  if true;          // public — product images are public
+      allow write: if isPharmacist() && isValidImage() && isUnder10MB();
+    }
+
+    // ── Profile photos ────────────────────────────────────────
+    match /avatars/{userId}/{filename} {
+      allow read:  if isAuthenticated();
+      allow write: if isAuthenticated()
+        && uid() == userId
+        && isValidImage()
+        && request.resource.size < 2 * 1024 * 1024;  // 2MB max for avatars
+    }
+
+    // ── Compliance reports / exports (admin only) ─────────────
+    match /reports/{filename} {
+      allow read, write: if isAdmin();
+    }
+
+    // ── Deny everything else ──────────────────────────────────
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}
