@@ -3,8 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kerich Pharmaceuticals — Your Health, Delivered</title>
+
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="apple-touch-icon" href="/favicon.ico"><title>Kerich Pharmaceuticals — Your Health, Delivered</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 :root{
@@ -1325,7 +1328,15 @@ table {
 pre {
   overflow-x: auto;
 }
-
+.logo-fixed {
+  position: absolute;
+  top: 45px;
+  right: 40px;
+  width: 45px;
+  height: 45px;
+  z-index: 9999;
+  pointer-events: none; /* prevents weird reflows */
+}
 </style>
 </head>
 <body>
@@ -1336,6 +1347,7 @@ pre {
   <div class="nav-inner">
     <a class="logo-wrap" onclick="showPage('landing')" href="#">
       <div class="logo-mark">K</div>
+      
       <div>
         <div class="logo-tag">Kerich</div>
         <div class="logo-tag">Pharmaceuticals</div>
@@ -1372,9 +1384,11 @@ pre {
 <!-- ══ LANDING PAGE ══ -->
 <div id="page-landing" class="page active">
   <section class="hero">
-    <div class="hero-bg" id="hero-bg"></div>
+<img src="./favicon.ico" class="logo-fixed">
+ <div class="hero-bg" id="hero-bg"></div>
     <div class="hero-inner">
       <div class="hero-text">
+        
         <h1>Your Health,<br>Our <span class="gold">Priority.</span></h1>
         <p>Order medicines, upload prescriptions, consult licensed Kenyan doctors — all from one secure, regulated platform. Delivered to your door in under 48 minutes.</p>
         <div class="hero-btns">

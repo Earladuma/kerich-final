@@ -547,8 +547,9 @@ p  { font-size: clamp(13px, 3.5vw, 15px); }
       <button class="form-submit" id="login-btn" onclick="doLogin()">Sign In</button>
       <div class="modal-switch">No account? <a onclick="showModal('register')">Register free</a></div>
     </div>
-    
+  </section>
     <!-- REGISTER -->
+     <section>
     <div id="modal-register" class="hidden">
       <div class="modal-title">Create Account</div>
       <div class="modal-sub">Join Kerich to order medicines</div>
@@ -560,7 +561,9 @@ p  { font-size: clamp(13px, 3.5vw, 15px); }
       <button class="form-submit" id="reg-btn" onclick="doRegister()">Create Account</button>
       <div class="modal-switch">Already have one? <a onclick="showModal('login')">Sign in</a></div>
     </div>
+  </section>
     <!-- CHECKOUT -->
+     <section>
     <div id="modal-checkout" class="hidden">
       <div class="modal-title">Checkout</div>
       <div id="co-user-strip" class="co-user-strip" style="display:none;">
@@ -593,7 +596,9 @@ p  { font-size: clamp(13px, 3.5vw, 15px); }
       <button class="form-submit" id="place-order-btn" onclick="placeOrder()">Place Order</button>
       <div class="cart-note" style="margin-top:12px;">🔒 Secure checkout · PCI-DSS compliant</div>
     </div>
+  </section>
     <!-- ORDER SUCCESS -->
+     <section>
     <div id="modal-success" class="hidden">
       <div class="order-success">
         <div class="order-success-icon">🎉</div>
@@ -607,7 +612,7 @@ p  { font-size: clamp(13px, 3.5vw, 15px); }
 </div>
 
 <div id="toast-container"></div>
-
+</section>
 <!-- FIREBASE SDK -->
 <script type="module">
 import { initializeApp }  from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";

@@ -254,7 +254,7 @@ body{background:var(--dark);color:var(--text);display:flex;min-height:100vh;over
       <div class="login-sub">Kerich Pharmaceuticals — Authorised Personnel Only</div>
     </div>
     <div class="login-err" id="login-err"></div>
-    <div class="login-field"><label class="login-label">Email Address</label><input id="l-email" class="login-input" type="email" placeholder="admin@kerichpharma.co.ke" autocomplete="email"></div>
+    <div class="login-field"><label class="login-label">Email Address</label><input id="l-email" class="login-input" type="email" placeholder="******************" autocomplete="email"></div>
     <div class="login-field"><label class="login-label">Password</label><input id="l-pass" class="login-input" type="password" placeholder="••••••••" autocomplete="current-password"></div>
     <button class="login-btn" id="login-btn" onclick="doAdminLogin()">Sign In to Admin</button>
     <div class="login-note">Access restricted to admins and pharmacists.<br>All sessions are logged and audited.<br><a href="index.html" style="color:var(--gold);">← Back to patient site</a></div>
@@ -486,8 +486,8 @@ body{background:var(--dark);color:var(--text);display:flex;min-height:100vh;over
           <h3>Pharmacy Details</h3>
           <label class="field-label">Pharmacy Name</label><input class="field-input" value="Kerich Pharmaceuticals Ltd">
           <label class="field-label">PPB Licence Number</label><input class="field-input" value="PPB/2025/NBI/0142">
-          <label class="field-label">Contact Email</label><input class="field-input" value="admin@kerichpharma.co.ke">
-          <label class="field-label">Phone</label><input class="field-input" value="+254 700 000 000">
+          <label class="field-label">Contact Email</label><input class="field-input" value="*****************">
+          <label class="field-label">Phone</label><input class="field-input" value="+254 726 283505">
           <button class="save-btn" onclick="adminToast('Settings saved.','success')">Save Changes</button>
         </div>
         <div class="settings-card">
@@ -674,12 +674,12 @@ onAuthStateChanged(auth, async user => {
 
   // 3. Fallback: if this is the configured admin email, allow access
   //    This lets the first admin log in before claims are set
-  const ADMIN_EMAILS = ['admin@kerichpharma.co.ke'];
+  const ADMIN_EMAILS = ['******************'];
   if (!role && ADMIN_EMAILS.includes(user.email)) role = 'admin';
 
   if (!['admin','pharmacist'].includes(role)) {
     await signOut(auth);
-    showLoginOverlay('Access denied — this account has no admin or pharmacist role.<br><br>Use <code style="color:var(--gold);">admin@kerichpharma.co.ke</code> after running <code style="color:var(--gold);">node scripts/seed.js</code>');
+    showLoginOverlay('Access denied — this account has no admin or pharmacist role.<br><br>Use <code style="color:var(--gold);">***********************</code> after running <code style="color:var(--gold);">node scripts/seed.js</code>');
     return;
   }
   adminUser  = user;
