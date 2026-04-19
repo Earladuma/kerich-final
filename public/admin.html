@@ -241,6 +241,7 @@ body{background:var(--dark);color:var(--text);display:flex;min-height:100vh;over
 @media(max-width:900px){.doc-portal-grid{grid-template-columns:1fr;}}
 @media(max-width:1100px){.kpi-grid{grid-template-columns:1fr 1fr;}.chart-row{grid-template-columns:1fr;}.bottom-row{grid-template-columns:1fr 1fr;}.del-board{grid-template-columns:1fr 1fr;}.patients-grid{grid-template-columns:1fr;}.settings-grid{grid-template-columns:1fr;}}
 @media(max-width:768px){body{flex-direction:column;}.sidebar{width:100%;min-height:auto;height:auto;flex-direction:row;overflow-x:auto;position:sticky;top:0;z-index:100;}.s-logo,.s-user{display:none;}.s-nav{display:flex;flex-direction:row;padding:6px;}.s-nav-group{display:flex;flex-direction:row;margin-bottom:0;gap:2px;}.s-nav-label{display:none;}.nav-item{white-space:nowrap;padding:8px 10px;}.nav-item.active::before{display:none;}.kpi-grid{grid-template-columns:1fr 1fr;}.del-board{grid-template-columns:1fr 1fr;}.rider-grid{grid-template-columns:1fr 1fr;}.inv-kpi{grid-template-columns:1fr 1fr;}.content-area{padding:14px;}}
+
 </style>
 </head>
 <body>
@@ -1175,16 +1176,31 @@ window.showPage = function(name) {
 
 // ── INVENTORY TABLE ───────────────────────────────────────────
 let invRendered = false;
-function renderInventoryTable() {
+
+
+
+async function renderInventoryTable() {
   if (invRendered) return;
   invRendered = true;
-fetch("http://localhost:3001/api/pharmacy/products?limit=1377")    .then(r=>r.ok?r.json():null)
-    .then(data => {
-      if (data?.products?.length) { renderInvRows(data.products); return; }
-      // Fallback to embedded data
+
+  try {
+    const snapshot = await getDocs(collection(db, "products"));
+
+    const products = snapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data()
+    }));
+
+    if (products.length) {
+      renderInvRows(products);
+    } else {
       renderInvFromEmbedded();
-    })
-    .catch(()=>renderInvFromEmbedded());
+    }
+
+  } catch (err) {
+    console.error("Error loading products:", err);
+    renderInvFromEmbedded();
+  }
 }
 
 function renderInvFromEmbedded() {
@@ -1585,5 +1601,6 @@ window.showPage = function(name) {
   }
 };
 </script>
+
 </body>
 </html>
