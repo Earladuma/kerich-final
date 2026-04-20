@@ -241,7 +241,11 @@ body{background:var(--dark);color:var(--text);display:flex;min-height:100vh;over
 @media(max-width:900px){.doc-portal-grid{grid-template-columns:1fr;}}
 @media(max-width:1100px){.kpi-grid{grid-template-columns:1fr 1fr;}.chart-row{grid-template-columns:1fr;}.bottom-row{grid-template-columns:1fr 1fr;}.del-board{grid-template-columns:1fr 1fr;}.patients-grid{grid-template-columns:1fr;}.settings-grid{grid-template-columns:1fr;}}
 @media(max-width:768px){body{flex-direction:column;}.sidebar{width:100%;min-height:auto;height:auto;flex-direction:row;overflow-x:auto;position:sticky;top:0;z-index:100;}.s-logo,.s-user{display:none;}.s-nav{display:flex;flex-direction:row;padding:6px;}.s-nav-group{display:flex;flex-direction:row;margin-bottom:0;gap:2px;}.s-nav-label{display:none;}.nav-item{white-space:nowrap;padding:8px 10px;}.nav-item.active::before{display:none;}.kpi-grid{grid-template-columns:1fr 1fr;}.del-board{grid-template-columns:1fr 1fr;}.rider-grid{grid-template-columns:1fr 1fr;}.inv-kpi{grid-template-columns:1fr 1fr;}.content-area{padding:14px;}}
-
+.table-wrap {
+  width: 100%;
+  overflow-x: auto;   /* ← this is the magic */
+  overflow-y: auto;
+}
 </style>
 </head>
 <body>
@@ -394,7 +398,8 @@ body{background:var(--dark);color:var(--text);display:flex;min-height:100vh;over
       </div>
       <div class="table-wrap">
         <table class="data-table">
-          <thead><tr><th>Order ID</th><th>Patient</th><th>Items</th><th>Total</th><th>Method</th><th>Status</th><th>Date</th><th>Actions</th></tr></thead>
+          <thead><tr><th>Order ID</th><th>Patient</th><th>Phone</th>
+    <th>Location</th><th>Items</th><th>Total</th><th>Method</th><th>Status</th><th>Date</th><th>Actions</th></tr></thead>
           <tbody id="orders-tbody"><tr><td colspan="8" style="text-align:center;padding:30px;color:var(--text3);">Loading orders…</td></tr></tbody>
         </table>
         <div class="pagination"><span id="orders-count">—</span></div>
@@ -863,7 +868,7 @@ window.renderOrdersTable = function() {
   const stCls = {pending:'sp-pending',confirmed:'sp-processing',processing:'sp-processing',dispensed:'sp-processing',in_transit:'sp-transit',delivered:'sp-delivered',cancelled:'sp-cancelled'};
   const tbody = document.getElementById('orders-tbody');
   const countEl = document.getElementById('orders-count');
-  if (!list.length) { tbody.innerHTML=`<tr><td colspan="8" style="text-align:center;padding:24px;color:var(--text3);">No orders found.</td></tr>`; countEl.textContent='0 orders'; return; }
+  if (!list.length) { tbody.innerHTML=`<tr><td colspan="10" style="text-align:center;padding:24px;color:var(--text3);">No orders found.</td></tr>`; countEl.textContent='0 orders'; return; }
   countEl.textContent = `${list.length} orders`;
   tbody.innerHTML = list.slice(0,50).map(o=>{
     const itemStr = o.items?.slice(0,2).map(i=>i.name).join(', ')+(o.items?.length>2?' …':'') || '—';
@@ -872,7 +877,49 @@ window.renderOrdersTable = function() {
     return `<tr>
       <td style="font-weight:500;color:var(--text);">${o.orderId||o.id.slice(0,10)}</td>
       <td>${(o.patientEmail||'—').split('@')[0]}</td>
-      <td style="max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${escHtml(itemStr)}</td>
+       <td>${o.phone || o.phoneNumber || o.userPhone || '—'}</td>
+
+<td style="max-width:240px; font-size:12px;">
+
+  <div style="display:flex; align-items:flex-start; gap:8px;">
+
+    <span style="font-size:16px;">📍</span>
+
+    <div style="flex:1;">
+
+      <div style="font-weight:500;">
+        ${escHtml(o.deliveryAddress?.street || '—')}
+      </div>
+
+      <div style="color:var(--text3); font-size:11px;">
+        ${escHtml(o.deliveryAddress?.city || '')}
+      </div>
+
+      ${o.deliveryAddress?.lat && o.deliveryAddress?.lng ? `
+        <div style="margin-top:4px; display:flex; gap:6px; flex-wrap:wrap;">
+
+          <a href="https://www.google.com/maps?q=${o.deliveryAddress.lat},${o.deliveryAddress.lng}" 
+             target="_blank"
+             style="font-size:11px; padding:3px 6px; border-radius:4px; background:#eef; text-decoration:none;">
+            🗺 Map
+          </a>
+
+          <a href="https://www.google.com/maps/dir/?api=1&destination=${o.deliveryAddress.lat},${o.deliveryAddress.lng}" 
+             target="_blank"
+             style="font-size:11px; padding:3px 6px; border-radius:4px; background:#efe; text-decoration:none;">
+            🧭 Navigate
+          </a>
+
+        </div>
+      ` : ''}
+
+    </div>
+  </div>
+
+</td>
+
+
+       <td style="max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${escHtml(itemStr)}</td>
       <td style="color:#C9A84C;font-weight:500;">KES ${(o.total||0).toLocaleString()}</td>
       <td>${o.paymentMethod||'—'}</td>
       <td><span class="s-pill ${stCls[o.status]||'sp-pending'}">${stLabel}</span></td>
