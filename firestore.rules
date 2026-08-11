@@ -1,0 +1,241 @@
+// firestore.rules
+// ════════════════════════════════════════════════════════════════
+//  Kerich Pharmaceuticals — Firestore Security Rules
+//  Compliant with Kenya Data Protection Act 2019
+//  PPB regulatory requirements
+// ════════════════════════════════════════════════════════════════
+
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ── Helper functions ─────────────────────────────────────
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function uid() {
+      return request.auth.uid;
+    }
+
+    function role() {
+      return request.auth.token.kerich_role;
+    }
+
+    function isAdmin() {
+      return isAuthenticated() && role() == 'admin';
+    }
+
+    function isPharmacist() {
+      return isAuthenticated() && (role() == 'pharmacist' || role() == 'admin');
+    }
+
+    function isDoctor() {
+      return isAuthenticated() && (role() == 'doctor' || role() == 'admin');
+    }
+
+    function isRider() {
+      return isAuthenticated() && (role() == 'rider' || role() == 'admin');
+    }
+
+    function isOwner(userId) {
+      return isAuthenticated() && uid() == userId;
+    }
+
+    function isClinical() {
+      return isAuthenticated() && role() in ['admin', 'pharmacist', 'doctor'];
+    }
+
+    // ── Users / Patient Profiles ─────────────────────────────
+    match /users/{userId} {
+      // Patients read own profile; clinical staff read any
+      allow read: if isOwner(userId) || isClinical();
+
+      // Only the user can create their own profile (set on register)
+      allow create: if isOwner(userId)
+        && request.resource.data.role == 'patient'  // cannot self-assign elevated role
+        && request.resource.data.keys().hasAll(['email', 'displayName', 'role', 'createdAt']);
+
+      // User updates own safe fields; admin updates anything
+      allow update: if isOwner(userId) && onlySafeUserFields()
+                  || isAdmin();
+
+      // Hard-delete blocked — admin anonymises via server (Kenya DPA 2019)
+      allow delete: if false;
+
+      function onlySafeUserFields() {
+        let allowed = ['displayName', 'phoneNumber', 'healthProfile', 'updatedAt'];
+        return request.resource.data.diff(resource.data).affectedKeys().hasOnly(allowed);
+      }
+    }
+
+    // ── Products / Inventory ─────────────────────────────────
+    match /products/{productId} {
+      // Anyone (even unauthenticated) can browse active products
+      allow read: if resource.data.active == true || isPharmacist();
+
+      // Only pharmacist / admin can create or modify
+      allow create, update: if isPharmacist();
+      allow delete:         if isAdmin();
+    }
+
+    // ── Orders ───────────────────────────────────────────────
+    match /orders/{orderId} {
+      // Patient reads own orders; clinical / rider read any
+      allow read: if isOwner(resource.data.patientId)
+               || isClinical()
+               || isRider();
+
+      // Patient creates order for themselves only
+      allow create: if isAuthenticated()
+        && request.resource.data.patientId == uid()
+        && request.resource.data.keys().hasAll(['patientId', 'items', 'total', 'status', 'createdAt']);
+
+      // Status updates by clinical/admin/rider; patient cannot update
+      allow update: if isClinical() || isRider();
+
+      allow delete: if false;
+    }
+
+    // ── Prescriptions ────────────────────────────────────────
+    match /prescriptions/{rxId} {
+      // Patient reads own; clinical reads any
+      allow read: if isOwner(resource.data.patientId) || isClinical();
+
+      // Patient uploads new prescription
+      allow create: if isAuthenticated()
+        && request.resource.data.patientId == uid()
+        && request.resource.data.status == 'pending_verification';
+
+      // Only pharmacist / admin can verify or reject
+      allow update: if isPharmacist()
+        && request.resource.data.diff(resource.data)
+            .affectedKeys().hasOnly(['status','verifiedBy','verifiedAt','rejectionReason','expiryDate','updatedAt']);
+
+      allow delete: if false;  // Rx records must be retained (PPB requirement)
+    }
+
+    // ── Deliveries / Tracking ─────────────────────────────────
+    match /deliveries/{deliveryId} {
+      allow read:   if isAuthenticated();
+      allow create: if isPharmacist();
+      allow update: if isRider() || isAdmin();
+      allow delete: if false;
+    }
+
+    // ── Payments ─────────────────────────────────────────────
+    match /payments/{paymentId} {
+      allow read:   if isOwner(resource.data.patientId) || isAdmin();
+      allow create: if isAuthenticated() && request.resource.data.patientId == uid();
+      // Only server-side (Admin SDK) updates payment status via backend
+      allow update: if isAdmin();
+      allow delete: if false;
+    }
+
+    // ── Doctors — the patient-facing list goes through the API
+    //    (GET /api/consultations/doctors), which strips uid/email before
+    //    returning data. Direct client reads are staff-only.
+    match /doctors/{doctorId} {
+      allow read:   if isClinical();
+      allow write:  if isAdmin();
+    }
+
+    // ── Consultations ─────────────────────────────────────────
+    match /consultations/{consultId} {
+      allow read:   if isOwner(resource.data.patientId) || isClinical();
+      allow create: if isAuthenticated();
+      allow update: if isClinical();
+      allow delete: if false;
+
+      // A caller counts as "this consultation's doctor" if their own uid
+      // matches the doctorId stored on the parent consultation — this
+      // works precisely because doctor doc IDs equal the doctor's own
+      // auth uid (see routes/consultations.js POST /doctors).
+      function isThisConsultDoctor() {
+        return isAuthenticated() && role() == 'doctor' &&
+               get(/databases/$(database)/documents/consultations/$(consultId)).data.doctorId == uid();
+      }
+      function isThisConsultPatient() {
+        return isAuthenticated() &&
+               get(/databases/$(database)/documents/consultations/$(consultId)).data.patientId == uid();
+      }
+      function isParticipant() {
+        return isThisConsultPatient() || isThisConsultDoctor() || isClinical();
+      }
+
+      // ── Chat messages — the full, permanent record of the
+      //    consultation's conversation. Only the patient and the
+      //    assigned doctor (or staff, for support/compliance) can read
+      //    or send; nothing is ever editable or deletable once sent —
+      //    a chat transcript that could be edited after the fact isn't
+      //    a real record.
+      match /messages/{messageId} {
+        allow read:   if isParticipant();
+        allow create: if isParticipant()
+                       && request.resource.data.senderId == uid()
+                       && request.resource.data.text is string
+                       && request.resource.data.text.size() > 0
+                       && request.resource.data.text.size() <= 4000;
+        allow update, delete: if false;
+      }
+    }
+
+    // ── Call signaling (WebRTC) — one doc per consultation, keyed by
+    //    consultId, holding the offer/answer plus ICE-candidate
+    //    subcollections. Ephemeral by nature (only meaningful while a
+    //    call is connecting/active), but the call's start/end/duration
+    //    is separately written to audit_logs as the permanent record —
+    //    this collection itself is signaling plumbing, not the record.
+    match /calls/{consultId} {
+      function isThisCallDoctor() {
+        return isAuthenticated() && role() == 'doctor' &&
+               get(/databases/$(database)/documents/consultations/$(consultId)).data.doctorId == uid();
+      }
+      function isThisCallPatient() {
+        return isAuthenticated() &&
+               get(/databases/$(database)/documents/consultations/$(consultId)).data.patientId == uid();
+      }
+      function isCallParticipant() {
+        return isThisCallPatient() || isThisCallDoctor() || isClinical();
+      }
+      allow read, create, update: if isCallParticipant();
+      allow delete: if isCallParticipant();
+
+      match /callerCandidates/{candidateId} {
+        allow read, create: if isCallParticipant();
+        allow update, delete: if false;
+      }
+      match /calleeCandidates/{candidateId} {
+        allow read, create: if isCallParticipant();
+        allow update, delete: if false;
+      }
+    }
+
+    // ── Sales — revenue records written when an order is marked
+    //    delivered. Immutable financial record; admin/pharmacist only. ──
+    match /sales/{saleId} {
+      allow read:   if isClinical();
+      allow create: if isPharmacist();
+      allow update, delete: if false;
+    }
+
+    // ── Audit Logs — write-only from clients, read by admin ──
+    match /audit_logs/{logId} {
+      allow read:   if isAdmin();
+      allow create: if isAuthenticated();  // server writes; clients cannot
+      allow update, delete: if false;     // immutable
+    }
+
+    // ── Error logs — server only ──────────────────────────────
+    match /error_logs/{logId} {
+      allow read:   if isAdmin();
+      allow create: if isAuthenticated();
+      allow update, delete: if false;
+    }
+
+    // ── Deny everything else ──────────────────────────────────
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

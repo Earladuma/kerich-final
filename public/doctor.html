@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Accessibility: theme / text size / reduced motion -->
+<script>
+(function(){
+  try {
+    var t = localStorage.getItem('kerich_theme');
+    if (t) document.documentElement.setAttribute('data-theme', t);
+    var s = localStorage.getItem('kerich_a11y_scale');
+    if (s && s !== '1') document.documentElement.setAttribute('data-a11y-scale', s);
+    if (localStorage.getItem('kerich_reduce_motion') === 'true') document.documentElement.classList.add('a11y-reduce-motion');
+  } catch(e) {}
+})();
+</script>
+<link rel="stylesheet" href="css/accessibility.css">
+<script src="js/accessibility.js" defer></script>
+<title>Doctor Portal — Kerich Pharmaceuticals</title>
+<meta name="robots" content="noindex, nofollow">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --gold:#C9A84C;--dark:#0A0A0F;--dark2:#111118;--dark3:#1A1A26;--dark4:#22223A;
+  --surface:#1C1C2A;--text:#F5F0E8;--text2:#B8B0A0;--text3:#7A7468;
+  --success:#1D9E75;--danger:#E24B4A;--radius:12px;
+}
+body{font-family:'DM Sans',sans-serif;background:var(--dark);color:var(--text);min-height:100vh;}
+.hidden{display:none !important;}
+
+/* ── LOGIN ── */
+#login-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;}
+.login-box{background:var(--surface);border:1px solid rgba(201,168,76,0.15);border-radius:var(--radius);padding:40px 36px;max-width:380px;width:100%;}
+.login-title{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:700;margin-bottom:4px;}
+.login-sub{font-size:13px;color:var(--text3);margin-bottom:24px;}
+.login-box input{width:100%;padding:11px 14px;margin-bottom:12px;border-radius:8px;border:1px solid var(--dark4);background:var(--dark3);color:var(--text);font-size:14px;font-family:inherit;}
+.login-box input:focus{outline:none;border-color:var(--gold);}
+.btn-primary{width:100%;padding:12px;border:none;border-radius:8px;background:var(--gold);color:#1A1200;font-weight:600;font-size:14px;cursor:pointer;font-family:inherit;}
+.btn-primary:disabled{opacity:.6;cursor:default;}
+.login-error{color:var(--danger);font-size:12px;margin-bottom:12px;display:none;}
+
+/* ── PORTAL ── */
+#portal-screen header{padding:16px 24px;background:var(--dark2);display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(201,168,76,0.1);flex-wrap:wrap;gap:10px;}
+.header-doc{display:flex;align-items:center;gap:10px;}
+.doc-avatar{width:38px;height:38px;border-radius:50%;background:rgba(201,168,76,0.15);color:var(--gold);display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px;}
+.doc-name{font-weight:600;font-size:14px;}
+.doc-spec{font-size:11px;color:var(--text3);}
+.header-actions{display:flex;align-items:center;gap:12px;}
+.avail-toggle{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text2);cursor:pointer;user-select:none;}
+.avail-dot{width:9px;height:9px;border-radius:50%;background:var(--text3);}
+.avail-dot.on{background:var(--success);}
+.btn-ghost{background:transparent;border:1px solid rgba(201,168,76,0.2);color:var(--text2);padding:8px 14px;border-radius:8px;font-size:12px;cursor:pointer;font-family:inherit;}
+
+.tabs{display:flex;gap:6px;padding:16px 24px 0;flex-wrap:wrap;}
+.tab-btn{padding:8px 16px;border-radius:20px;border:1px solid var(--dark4);background:var(--dark3);color:var(--text2);font-size:12px;cursor:pointer;font-family:inherit;}
+.tab-btn.active{border-color:var(--gold);color:var(--gold);background:rgba(201,168,76,0.08);}
+
+.queue{padding:20px 24px;max-width:820px;}
+.consult-card{background:var(--surface);border:1px solid rgba(201,168,76,0.1);border-radius:var(--radius);padding:16px 18px;margin-bottom:12px;}
+.cc-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:8px;}
+.cc-patient{font-weight:600;font-size:14px;}
+.cc-meta{font-size:11px;color:var(--text3);margin-top:2px;}
+.cc-status{font-size:11px;padding:3px 10px;border-radius:20px;white-space:nowrap;}
+.st-requested{background:rgba(201,168,76,0.12);color:var(--gold);}
+.st-confirmed{background:rgba(55,138,221,0.12);color:#5B9EE8;}
+.st-in_progress{background:rgba(201,168,76,0.15);color:var(--gold);}
+.st-completed{background:rgba(29,158,117,0.12);color:#5DCAA5;}
+.st-cancelled,.st-declined{background:rgba(226,75,74,0.12);color:#F09595;}
+.cc-reason{font-size:12px;color:var(--text2);margin:8px 0;line-height:1.5;}
+.cc-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;}
+.act-btn{padding:7px 14px;border-radius:6px;border:none;font-size:12px;cursor:pointer;font-family:inherit;font-weight:500;}
+.act-confirm{background:var(--success);color:#fff;}
+.act-decline{background:var(--danger);color:#fff;}
+.act-start{background:var(--gold);color:#1A1200;}
+.act-complete{background:var(--success);color:#fff;}
+.act-secondary{background:var(--dark3);color:var(--text2);border:1px solid var(--dark4);}
+.empty-state{text-align:center;padding:60px 20px;color:var(--text3);font-size:13px;}
+.notes-box{width:100%;margin-top:8px;padding:9px 12px;border-radius:8px;border:1px solid var(--dark4);background:var(--dark3);color:var(--text);font-family:inherit;font-size:12px;resize:vertical;display:block;}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--surface);border:1px solid rgba(201,168,76,0.2);border-radius:8px;padding:12px 20px;font-size:13px;z-index:999;}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login-screen">
+  <div class="login-box">
+    <div class="login-title">Doctor Portal</div>
+    <div class="login-sub">Sign in with your Kerich Pharmaceuticals doctor account.</div>
+    <div class="login-error" id="login-error"></div>
+    <input type="email" id="login-email" placeholder="Email" autocomplete="username">
+    <input type="password" id="login-password" placeholder="Password" autocomplete="current-password">
+    <button class="btn-primary" id="login-btn" onclick="doLogin()">Sign In</button>
+  </div>
+</div>
+
+<!-- PORTAL -->
+<div id="portal-screen" class="hidden">
+  <header>
+    <div class="header-doc">
+      <div class="doc-avatar" id="doc-avatar">—</div>
+      <div>
+        <div class="doc-name" id="doc-name">—</div>
+        <div class="doc-spec" id="doc-spec">—</div>
+      </div>
+    </div>
+    <div class="header-actions">
+      <div class="avail-toggle" onclick="toggleAvailability()">
+        <span class="avail-dot" id="avail-dot"></span>
+        <span id="avail-label">Loading…</span>
+      </div>
+      <button class="btn-ghost" onclick="doLogout()">Sign Out</button>
+    </div>
+  </header>
+
+  <div class="tabs">
+    <button class="tab-btn active" data-status="all" onclick="selectTab(this,'all')">All</button>
+    <button class="tab-btn" data-status="requested" onclick="selectTab(this,'requested')">Requested</button>
+    <button class="tab-btn" data-status="confirmed" onclick="selectTab(this,'confirmed')">Confirmed</button>
+    <button class="tab-btn" data-status="in_progress" onclick="selectTab(this,'in_progress')">In Progress</button>
+    <button class="tab-btn" data-status="completed" onclick="selectTab(this,'completed')">Completed</button>
+  </div>
+
+  <div class="queue" id="queue">
+    <div class="empty-state">Loading your consultations…</div>
+  </div>
+</div>
+
+<div id="toast" class="toast hidden"></div>
+
+<div class="modal-bg" id="consult-room-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);align-items:center;justify-content:center;z-index:1000;">
+  <div style="background:var(--dark2);border:1px solid rgba(201,168,76,0.2);border-radius:14px;max-width:520px;width:92%;overflow:hidden;display:flex;flex-direction:column;height:640px;max-height:88vh;">
+    <div style="padding:16px 20px;border-bottom:1px solid rgba(201,168,76,0.12);display:flex;justify-content:space-between;align-items:center;flex-shrink:0;">
+      <div>
+        <div style="font-size:14px;font-weight:600;color:var(--text);" id="room-patient-name">—</div>
+        <div style="font-size:11px;color:var(--text3);" id="room-call-status">Chat</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <button id="room-tab-chat" onclick="switchRoomTab('chat')" class="room-tab-btn active">💬 Chat</button>
+        <button id="room-tab-call" onclick="switchRoomTab('call')" class="room-tab-btn">📹 Call</button>
+        <button onclick="closeConsultRoom()" style="background:rgba(255,255,255,0.08);border:none;color:var(--text2);width:28px;height:28px;border-radius:50%;cursor:pointer;">✕</button>
+      </div>
+    </div>
+
+    <div id="room-pane-chat" style="flex:1;display:flex;flex-direction:column;min-height:0;">
+      <div id="room-messages" style="flex:1;overflow-y:auto;padding:16px 18px;display:flex;flex-direction:column;gap:10px;"></div>
+      <div style="padding:12px 16px;border-top:1px solid rgba(201,168,76,0.1);display:flex;gap:8px;flex-shrink:0;">
+        <input id="room-msg-input" type="text" placeholder="Type a message…" style="flex:1;padding:10px 14px;border-radius:20px;border:1px solid var(--dark4);background:var(--dark3);color:var(--text);font-family:inherit;font-size:13px;">
+        <button onclick="sendRoomMessage()" style="background:var(--gold);color:#1A1200;border:none;width:38px;height:38px;border-radius:50%;font-size:16px;cursor:pointer;flex-shrink:0;">➤</button>
+      </div>
+    </div>
+
+    <div id="room-pane-call" class="hidden" style="flex:1;display:flex;flex-direction:column;min-height:0;background:#000;position:relative;">
+      <video id="room-remote-video" autoplay playsinline style="width:100%;height:100%;object-fit:cover;background:#111;flex:1;"></video>
+      <video id="room-local-video" autoplay playsinline muted style="position:absolute;bottom:80px;right:16px;width:110px;height:150px;object-fit:cover;border-radius:10px;border:2px solid rgba(201,168,76,0.4);background:#1A1A26;"></video>
+      <div id="room-call-idle" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--text2);text-align:center;padding:20px;">
+        <div style="font-size:44px;margin-bottom:14px;">📹</div>
+        <div style="font-size:13px;margin-bottom:20px;" id="room-call-idle-text">Start a video or voice call with your patient.</div>
+        <div style="display:flex;gap:10px;">
+          <button onclick="startRoomCall(true)" style="background:var(--gold);color:#1A1200;border:none;padding:10px 18px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;">🎥 Video Call</button>
+          <button onclick="startRoomCall(false)" style="background:var(--dark3);color:var(--text);border:1px solid rgba(201,168,76,0.2);padding:10px 18px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;">📞 Voice Only</button>
+        </div>
+      </div>
+      <div id="room-call-controls" class="hidden" style="position:absolute;bottom:16px;left:0;right:0;display:flex;justify-content:center;gap:12px;">
+        <button onclick="toggleRoomMute()" id="room-btn-mute" class="room-call-ctrl">🎤</button>
+        <button onclick="toggleRoomVideo()" id="room-btn-video" class="room-call-ctrl">📹</button>
+        <button onclick="endRoomCall()" class="room-call-ctrl" style="background:var(--danger);">📞</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+#consult-room-modal.open{display:flex !important;}
+.room-tab-btn{background:transparent;border:1px solid rgba(201,168,76,0.2);color:var(--text2);font-size:11px;padding:6px 12px;border-radius:16px;cursor:pointer;font-family:inherit;}
+.room-tab-btn.active{background:rgba(201,168,76,0.12);color:var(--gold);border-color:var(--gold);}
+.room-msg{max-width:78%;padding:9px 13px;border-radius:14px;font-size:13px;line-height:1.45;}
+.room-msg.mine{align-self:flex-end;background:var(--gold);color:#1A1200;border-bottom-right-radius:4px;}
+.room-msg.theirs{align-self:flex-start;background:var(--dark3);color:var(--text);border-bottom-left-radius:4px;}
+.room-msg.system{align-self:center;background:transparent;color:var(--text3);font-size:11px;font-style:italic;}
+.room-msg-time{font-size:9px;opacity:0.6;margin-top:3px;}
+.room-call-ctrl{width:48px;height:48px;border-radius:50%;border:none;background:rgba(255,255,255,0.15);color:#fff;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(6px);}
+.room-call-ctrl.off{background:var(--danger);}
+</style>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import {
+  getFirestore, collection, doc, setDoc, getDoc, addDoc, updateDoc, deleteDoc,
+  query, orderBy, limit, onSnapshot, serverTimestamp
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const cfg = {
+  apiKey:"AIzaSyDkSTdMVyBonlpRWy6xXm-eNpdAG0hJy9s",
+  authDomain:"kerich-4aefa.firebaseapp.com",
+  projectId:"kerich-4aefa",
+  storageBucket:"kerich-4aefa.firebasestorage.app",
+  messagingSenderId:"1065143450049",
+  appId:"1:1065143450049:web:188de865640fe170175740",
+};
+const app  = initializeApp(cfg);
+const auth = getAuth(app);
+const db   = getFirestore(app);
+
+let currentToken = null;
+let currentUser  = null;
+let myProfile     = null;
+let myQueue       = [];
+let activeTab     = 'all';
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.remove('hidden');
+  setTimeout(() => t.classList.add('hidden'), 3000);
+}
+
+window.doLogin = async function() {
+  const email = document.getElementById('login-email').value.trim();
+  const pass  = document.getElementById('login-password').value;
+  const errEl = document.getElementById('login-error');
+  errEl.style.display = 'none';
+  if (!email || !pass) { errEl.textContent = 'Enter your email and password.'; errEl.style.display = 'block'; return; }
+
+  const btn = document.getElementById('login-btn');
+  btn.disabled = true; btn.textContent = 'Signing in…';
+  try {
+    await signInWithEmailAndPassword(auth, email, pass);
+    // onAuthStateChanged picks it up from here
+  } catch (err) {
+    errEl.textContent = 'Invalid email or password.';
+    errEl.style.display = 'block';
+    btn.disabled = false; btn.textContent = 'Sign In';
+  }
+};
+
+window.doLogout = function() { signOut(auth); };
+
+onAuthStateChanged(auth, async (user) => {
+  const loginScreen  = document.getElementById('login-screen');
+  const portalScreen = document.getElementById('portal-screen');
+  const btn = document.getElementById('login-btn');
+
+  if (!user) {
+    portalScreen.classList.add('hidden');
+    loginScreen.classList.remove('hidden');
+    if (btn) { btn.disabled = false; btn.textContent = 'Sign In'; }
+    return;
+  }
+
+  const tokenResult = await user.getIdTokenResult(true);
+  const role = tokenResult.claims.kerich_role;
+  if (role !== 'doctor') {
+    document.getElementById('login-error').textContent =
+      'This account is not registered as a doctor. Contact the pharmacy admin.';
+    document.getElementById('login-error').style.display = 'block';
+    await signOut(auth);
+    return;
+  }
+
+  currentToken = tokenResult.token;
+  currentUser  = user;
+  setInterval(async () => { currentToken = await auth.currentUser.getIdToken(true); }, 50 * 60 * 1000);
+
+  loginScreen.classList.add('hidden');
+  portalScreen.classList.remove('hidden');
+  await loadProfile();
+  await loadQueue();
+});
+
+async function apiFetch(path, opts = {}) {
+  const res = await fetch(path, {
+    ...opts,
+    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${currentToken}`, ...(opts.headers||{}) },
+  });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(data.error || `Request failed (${res.status})`);
+  return data;
+}
+
+async function loadProfile() {
+  try {
+    myProfile = await apiFetch('/api/consultations/doctors/me');
+    const initials = (myProfile.name||'Dr').split(' ').filter(Boolean).map(w=>w[0]).slice(0,2).join('').toUpperCase();
+    document.getElementById('doc-avatar').textContent = initials;
+    document.getElementById('doc-name').textContent   = myProfile.name || '—';
+    document.getElementById('doc-spec').textContent   = myProfile.speciality || '—';
+    renderAvailability(myProfile.available);
+  } catch (err) {
+    showToast(err.message || 'Could not load your profile.');
+  }
+}
+
+function renderAvailability(available) {
+  document.getElementById('avail-dot').classList.toggle('on', !!available);
+  document.getElementById('avail-label').textContent = available ? 'Available now' : 'Not available';
+}
+
+window.toggleAvailability = async function() {
+  if (!myProfile) return;
+  const next = !myProfile.available;
+  try {
+    await apiFetch('/api/consultations/doctors/me/availability', {
+      method: 'PATCH', body: JSON.stringify({ available: next }),
+    });
+    myProfile.available = next;
+    renderAvailability(next);
+    showToast(next ? "You're now marked available." : "You're now marked unavailable.");
+  } catch (err) {
+    showToast(err.message || 'Could not update availability.');
+  }
+};
+
+async function loadQueue() {
+  try {
+    const data = await apiFetch('/api/consultations/doctor/mine?limit=100');
+    myQueue = data.consultations || [];
+    renderQueue();
+  } catch (err) {
+    document.getElementById('queue').innerHTML = `<div class="empty-state">Couldn't load your consultations: ${escHtml(err.message)}</div>`;
+  }
+}
+
+window.selectTab = function(el, status) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+  activeTab = status;
+  renderQueue();
+};
+
+function fmtWhen(c) {
+  if (!c.scheduledFor) return 'ASAP';
+  const d = c.scheduledFor._seconds ? new Date(c.scheduledFor._seconds * 1000) : new Date(c.scheduledFor);
+  return d.toLocaleString('en-KE', { dateStyle: 'medium', timeStyle: 'short' });
+}
+
+function renderQueue() {
+  const list = activeTab === 'all' ? myQueue : myQueue.filter(c => c.status === activeTab);
+  const el = document.getElementById('queue');
+  if (!list.length) {
+    el.innerHTML = `<div class="empty-state">No consultations here.</div>`;
+    return;
+  }
+  el.innerHTML = list.map(c => cardHtml(c)).join('');
+}
+
+function cardHtml(c) {
+  const statusLabel = (c.status || 'requested').replace('_', ' ');
+  const roomBtn = ['confirmed','in_progress'].includes(c.status)
+    ? `<button class="act-btn act-secondary" onclick="openConsultRoom('${c.id}','${(c.patientName||c.patientEmail||'Patient').replace(/'/g,"\\'")}')">💬 Chat &amp; Call</button>`
+    : '';
+  let actions = '';
+  if (c.status === 'requested') {
+    actions = `
+      <button class="act-btn act-confirm" onclick="setStatus('${c.id}','confirmed')">Confirm</button>
+      <button class="act-btn act-decline" onclick="setStatus('${c.id}','declined')">Decline</button>`;
+  } else if (c.status === 'confirmed') {
+    actions = `
+      ${roomBtn}
+      <button class="act-btn act-start" onclick="setStatus('${c.id}','in_progress')">Start Consultation</button>
+      <button class="act-btn act-secondary" onclick="setStatus('${c.id}','cancelled')">Cancel</button>`;
+  } else if (c.status === 'in_progress') {
+    actions = `
+      ${roomBtn}
+      <textarea class="notes-box" id="notes-${c.id}" placeholder="Consultation notes (optional)…"></textarea>
+      <button class="act-btn act-complete" onclick="completeConsult('${c.id}')">Mark Completed</button>`;
+  }
+
+  return `<div class="consult-card">
+    <div class="cc-top">
+      <div>
+        <div class="cc-patient">${escHtml(c.patientName || c.patientEmail || 'Patient')}</div>
+        <div class="cc-meta">${escHtml(c.channel||'—')} · ${fmtWhen(c)} · KES ${(c.fee||0).toLocaleString()}</div>
+      </div>
+      <span class="cc-status st-${c.status}">${statusLabel}</span>
+    </div>
+    ${c.reason ? `<div class="cc-reason">"${escHtml(c.reason)}"</div>` : ''}
+    ${c.notes ? `<div class="cc-reason" style="color:var(--text3);">Notes: ${escHtml(c.notes)}</div>` : ''}
+    <div class="cc-actions">${actions}</div>
+  </div>`;
+}
+
+window.setStatus = async function(id, status) {
+  try {
+    await apiFetch(`/api/consultations/${id}`, { method: 'PATCH', body: JSON.stringify({ status }) });
+    showToast(`Consultation → ${status.replace('_',' ')}.`);
+    await loadQueue();
+  } catch (err) {
+    showToast(err.message || 'Update failed.');
+  }
+};
+
+window.completeConsult = async function(id) {
+  const notesEl = document.getElementById(`notes-${id}`);
+  const notes = notesEl ? notesEl.value.trim() : '';
+  try {
+    const body = { status: 'completed' };
+    if (notes) body.notes = notes;
+    await apiFetch(`/api/consultations/${id}`, { method: 'PATCH', body: JSON.stringify(body) });
+    showToast('Consultation completed.');
+    await loadQueue();
+  } catch (err) {
+    showToast(err.message || 'Could not complete consultation.');
+  }
+};
+
+function escHtml(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+// ── Consultation Room: live chat + WebRTC video/voice call ─────
+// Mirrors the patient-side implementation in index.html — see that
+// file's comments for the full design rationale (Firestore-backed
+// signaling, no TURN server configured, chat messages are permanent).
+const RTC_CONFIG = { iceServers: [{ urls: 'stun:stun.l.google.com:19302' }] };
+
+let roomConsultId    = null;
+let roomPatientName  = null;
+let roomMsgUnsub     = null;
+let roomCallUnsub    = null;
+let roomPeerConn     = null;
+let roomLocalStream  = null;
+let roomCallStart    = null;
+let roomCallerCandUnsub = null;
+let roomCalleeCandUnsub = null;
+let roomMuted        = false;
+let roomVideoOff     = false;
+
+window.openConsultRoom = function(consultId, patientName) {
+  roomConsultId   = consultId;
+  roomPatientName = patientName;
+  document.getElementById('room-patient-name').textContent = patientName;
+  document.getElementById('consult-room-modal').classList.add('open');
+  switchRoomTab('chat');
+  listenRoomMessages();
+};
+
+window.closeConsultRoom = function() {
+  document.getElementById('consult-room-modal').classList.remove('open');
+  if (roomMsgUnsub) { roomMsgUnsub(); roomMsgUnsub = null; }
+  if (!document.getElementById('room-call-controls').classList.contains('hidden')) endRoomCall();
+  roomConsultId = null;
+};
+
+window.switchRoomTab = function(tab) {
+  document.getElementById('room-tab-chat').classList.toggle('active', tab === 'chat');
+  document.getElementById('room-tab-call').classList.toggle('active', tab === 'call');
+  document.getElementById('room-pane-chat').classList.toggle('hidden', tab !== 'chat');
+  document.getElementById('room-pane-call').classList.toggle('hidden', tab !== 'call');
+  if (tab === 'call') checkForIncomingCall();
+};
+
+async function checkForIncomingCall() {
+  if (!roomConsultId || roomPeerConn) return;
+  try {
+    const snap = await getDoc(doc(db, 'calls', roomConsultId));
+    const data = snap.exists() ? snap.data() : null;
+    if (data?.offer && !data?.answer && data.initiatedBy !== currentUser.uid) {
+      document.getElementById('room-call-idle-text').textContent = `${roomPatientName} is calling…`;
+      document.getElementById('room-call-idle').querySelector('div[style*="display:flex"]').innerHTML =
+        `<button onclick="answerRoomCall(${data.withVideo ? 'true' : 'false'})" style="background:#5DCAA5;color:#0A0A0F;border:none;padding:10px 18px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;">✅ Answer</button>`;
+    }
+  } catch (err) { console.error('Incoming-call check failed:', err); }
+}
+
+// ── Chat ─────────────────────────────────────────────────────
+function listenRoomMessages() {
+  if (roomMsgUnsub) roomMsgUnsub();
+  const q = query(collection(db, 'consultations', roomConsultId, 'messages'), orderBy('createdAt', 'asc'), limit(200));
+  roomMsgUnsub = onSnapshot(q, snap => {
+    const el = document.getElementById('room-messages');
+    el.innerHTML = snap.docs.map(d => {
+      const m = d.data();
+      if (m.type === 'system') return `<div class="room-msg system">${escHtml(m.text)}</div>`;
+      const mine = m.senderId === currentUser.uid;
+      const time = m.createdAt?.toDate ? m.createdAt.toDate().toLocaleTimeString('en-KE',{hour:'2-digit',minute:'2-digit'}) : '';
+      return `<div class="room-msg ${mine?'mine':'theirs'}">${escHtml(m.text)}<div class="room-msg-time">${escHtml(mine?'You':(m.senderName||roomPatientName))} · ${time}</div></div>`;
+    }).join('') || '<div class="room-msg system">No messages yet.</div>';
+    el.scrollTop = el.scrollHeight;
+  }, err => console.error('Chat listener error:', err));
+}
+
+window.sendRoomMessage = async function() {
+  const input = document.getElementById('room-msg-input');
+  const text = input.value.trim();
+  if (!text || !roomConsultId) return;
+  input.value = '';
+  try {
+    await addDoc(collection(db, 'consultations', roomConsultId, 'messages'), {
+      senderId: currentUser.uid,
+      senderName: currentUser.displayName || currentUser.email,
+      senderRole: 'doctor',
+      text: text.slice(0, 4000),
+      type: 'text',
+      createdAt: serverTimestamp(),
+    });
+  } catch (err) {
+    showToast('Message failed to send: ' + err.message);
+  }
+};
+document.getElementById('room-msg-input').addEventListener('keydown', e => { if (e.key === 'Enter') sendRoomMessage(); });
+
+// ── Call (WebRTC, Firestore signaling) ──────────────────────────
+window.startRoomCall = async function(withVideo) {
+  document.getElementById('room-call-idle').classList.add('hidden');
+  document.getElementById('room-call-controls').classList.remove('hidden');
+  document.getElementById('room-call-status').textContent = 'Connecting…';
+
+  try {
+    roomLocalStream = await navigator.mediaDevices.getUserMedia({ video: withVideo, audio: true });
+  } catch (err) {
+    showToast('Could not access camera/microphone: ' + err.message);
+    resetCallUi();
+    return;
+  }
+  document.getElementById('room-local-video').srcObject = roomLocalStream;
+  if (!withVideo) document.getElementById('room-local-video').classList.add('hidden');
+
+  roomPeerConn = new RTCPeerConnection(RTC_CONFIG);
+  roomLocalStream.getTracks().forEach(t => roomPeerConn.addTrack(t, roomLocalStream));
+  roomPeerConn.ontrack = e => { document.getElementById('room-remote-video').srcObject = e.streams[0]; };
+  roomPeerConn.onconnectionstatechange = () => {
+    if (roomPeerConn?.connectionState === 'connected') {
+      document.getElementById('room-call-status').textContent = 'On call';
+      roomCallStart = Date.now();
+    }
+  };
+
+  const callDocRef = doc(db, 'calls', roomConsultId);
+  const callerCandidates = collection(callDocRef, 'callerCandidates');
+  roomPeerConn.onicecandidate = e => { if (e.candidate) addDoc(callerCandidates, e.candidate.toJSON()); };
+
+  const offer = await roomPeerConn.createOffer();
+  await roomPeerConn.setLocalDescription(offer);
+  await setDoc(callDocRef, {
+    offer: { type: offer.type, sdp: offer.sdp },
+    withVideo, initiatedBy: currentUser.uid, status: 'ringing', createdAt: serverTimestamp(),
+  });
+
+  roomCallUnsub = onSnapshot(callDocRef, async snap => {
+    const data = snap.data();
+    if (data?.answer && roomPeerConn && !roomPeerConn.currentRemoteDescription) {
+      await roomPeerConn.setRemoteDescription(new RTCSessionDescription(data.answer));
+    }
+  });
+  roomCalleeCandUnsub = onSnapshot(collection(callDocRef, 'calleeCandidates'), snap => {
+    snap.docChanges().forEach(c => { if (c.type === 'added' && roomPeerConn) roomPeerConn.addIceCandidate(new RTCIceCandidate(c.doc.data())); });
+  });
+
+  logConsultationEvent('CONSULTATION_CALL_STARTED', { channel: withVideo ? 'video' : 'voice' });
+};
+
+window.answerRoomCall = async function(withVideo) {
+  document.getElementById('room-call-idle').classList.add('hidden');
+  document.getElementById('room-call-controls').classList.remove('hidden');
+  document.getElementById('room-call-status').textContent = 'Connecting…';
+
+  try {
+    roomLocalStream = await navigator.mediaDevices.getUserMedia({ video: withVideo, audio: true });
+  } catch (err) {
+    showToast('Could not access camera/microphone: ' + err.message);
+    resetCallUi();
+    return;
+  }
+  document.getElementById('room-local-video').srcObject = roomLocalStream;
+  if (!withVideo) document.getElementById('room-local-video').classList.add('hidden');
+
+  const callDocRef = doc(db, 'calls', roomConsultId);
+  const snap = await getDoc(callDocRef);
+  const data = snap.data();
+
+  roomPeerConn = new RTCPeerConnection(RTC_CONFIG);
+  roomLocalStream.getTracks().forEach(t => roomPeerConn.addTrack(t, roomLocalStream));
+  roomPeerConn.ontrack = e => { document.getElementById('room-remote-video').srcObject = e.streams[0]; };
+  roomPeerConn.onconnectionstatechange = () => {
+    if (roomPeerConn?.connectionState === 'connected') {
+      document.getElementById('room-call-status').textContent = 'On call';
+      roomCallStart = Date.now();
+    }
+  };
+
+  const calleeCandidates = collection(callDocRef, 'calleeCandidates');
+  roomPeerConn.onicecandidate = e => { if (e.candidate) addDoc(calleeCandidates, e.candidate.toJSON()); };
+
+  await roomPeerConn.setRemoteDescription(new RTCSessionDescription(data.offer));
+  const answer = await roomPeerConn.createAnswer();
+  await roomPeerConn.setLocalDescription(answer);
+  await updateDoc(callDocRef, { answer: { type: answer.type, sdp: answer.sdp }, status: 'active' });
+
+  roomCallerCandUnsub = onSnapshot(collection(callDocRef, 'callerCandidates'), snap => {
+    snap.docChanges().forEach(c => { if (c.type === 'added' && roomPeerConn) roomPeerConn.addIceCandidate(new RTCIceCandidate(c.doc.data())); });
+  });
+
+  logConsultationEvent('CONSULTATION_CALL_STARTED', { channel: withVideo ? 'video' : 'voice', answered: true });
+};
+
+window.toggleRoomMute = function() {
+  if (!roomLocalStream) return;
+  roomMuted = !roomMuted;
+  roomLocalStream.getAudioTracks().forEach(t => t.enabled = !roomMuted);
+  document.getElementById('room-btn-mute').classList.toggle('off', roomMuted);
+};
+
+window.toggleRoomVideo = function() {
+  if (!roomLocalStream) return;
+  roomVideoOff = !roomVideoOff;
+  roomLocalStream.getVideoTracks().forEach(t => t.enabled = !roomVideoOff);
+  document.getElementById('room-btn-video').classList.toggle('off', roomVideoOff);
+};
+
+window.endRoomCall = async function() {
+  const durationSec = roomCallStart ? Math.round((Date.now() - roomCallStart) / 1000) : 0;
+  if (roomLocalStream) { roomLocalStream.getTracks().forEach(t => t.stop()); roomLocalStream = null; }
+  if (roomPeerConn) { roomPeerConn.close(); roomPeerConn = null; }
+  if (roomCallUnsub) { roomCallUnsub(); roomCallUnsub = null; }
+  if (roomCalleeCandUnsub) { roomCalleeCandUnsub(); roomCalleeCandUnsub = null; }
+  if (roomCallerCandUnsub) { roomCallerCandUnsub(); roomCallerCandUnsub = null; }
+  if (roomConsultId) {
+    try { await deleteDoc(doc(db, 'calls', roomConsultId)); } catch {}
+    logConsultationEvent('CONSULTATION_CALL_ENDED', { durationSeconds: durationSec });
+  }
+  resetCallUi();
+};
+
+function resetCallUi() {
+  document.getElementById('room-remote-video').srcObject = null;
+  document.getElementById('room-local-video').srcObject = null;
+  document.getElementById('room-local-video').classList.remove('hidden');
+  document.getElementById('room-call-controls').classList.add('hidden');
+  document.getElementById('room-call-idle').classList.remove('hidden');
+  document.getElementById('room-call-status').textContent = 'Chat';
+  roomMuted = false; roomVideoOff = false; roomCallStart = null;
+  document.getElementById('room-btn-mute')?.classList.remove('off');
+  document.getElementById('room-btn-video')?.classList.remove('off');
+}
+
+async function logConsultationEvent(action, extra) {
+  try {
+    await addDoc(collection(db, 'audit_logs'), {
+      action, consultationId: roomConsultId, userId: currentUser.uid,
+      ...extra, timestamp: serverTimestamp(),
+    });
+  } catch (err) { console.error('Audit log failed:', err); }
+}
+
+// Enter key submits login
+document.getElementById('login-password').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
+</script>
+</body>
+</html>

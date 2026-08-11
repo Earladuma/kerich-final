@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /admin.html
+Disallow: /doctor.html
+Disallow: /rider.html
+Disallow: /api/
+
+Sitemap: https://kerichpharma.co.ke/sitemap.xml

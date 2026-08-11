@@ -1,0 +1,1708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Accessibility: theme / text size / reduced motion -->
+<script>
+(function(){
+  try {
+    var t = localStorage.getItem('kerich_theme');
+    if (t) document.documentElement.setAttribute('data-theme', t);
+    var s = localStorage.getItem('kerich_a11y_scale');
+    if (s && s !== '1') document.documentElement.setAttribute('data-a11y-scale', s);
+    if (localStorage.getItem('kerich_reduce_motion') === 'true') document.documentElement.classList.add('a11y-reduce-motion');
+  } catch(e) {}
+})();
+</script>
+<link rel="stylesheet" href="css/accessibility.css">
+<script src="js/accessibility.js" defer></script>
+<title>Shop Medicines — Kerich Pharmaceuticals</title>
+<meta name="description" content="Browse and order over-the-counter medicines, prescription refills, vitamins, baby care, and health essentials online from Kerich Pharmaceuticals, with same-day delivery in Nairobi.">
+<link rel="canonical" href="https://kerichpharma.co.ke/shop.html">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Shop Medicines — Kerich Pharmaceuticals">
+<meta property="og:description" content="Order medicines, vitamins, and health essentials online with same-day delivery in Nairobi.">
+<meta property="og:image" content="https://kerichpharma.co.ke/images/og-default.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://kerichpharma.co.ke/images/og-default.png">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Kerich Pharmaceuticals",
+  "url": "https://kerichpharma.co.ke/shop.html",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://kerichpharma.co.ke/shop.html?search={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://kerichpharma.co.ke/" },
+    { "@type": "ListItem", "position": 2, "name": "Shop", "item": "https://kerichpharma.co.ke/shop.html" }
+  ]
+}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --gold:#C9A84C;--gold-light:#E8C97A;--gold-dark:#8B6914;
+  --dark:#0A0A0F;--dark2:#111118;--dark3:#1A1A26;--dark4:#22223A;
+  --surface:#1C1C2A;--surface2:#222232;
+  --text:#F5F0E8;--text2:#B8B0A0;--text3:#7A7468;
+  --success:#1D9E75;--danger:#E24B4A;--radius:12px;--radius-sm:8px;
+}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--dark);color:var(--text);overflow-x:hidden;}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);}
+/* NAV */
+nav{position:sticky;top:0;z-index:200;background:rgba(10,10,15,0.96);backdrop-filter:blur(12px);border-bottom:1px solid rgba(201,168,76,0.12);}
+.nav-inner{max-width:1400px;margin:0 auto;padding:0 24px;height:60px;display:flex;align-items:center;gap:16px;}
+.logo-wrap{display:flex;align-items:center;gap:9px;text-decoration:none;flex-shrink:0;}
+.logo-mark{width:32px;height:32px;background:linear-gradient(135deg,var(--gold),var(--gold-dark));border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-weight:700;font-size:15px;color:var(--dark);}
+.logo-name{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:700;line-height:1;}
+.logo-tag{font-size:8px;letter-spacing:1.5px;color:var(--gold);text-transform:uppercase;}
+.nav-search{flex:1;max-width:560px;position:relative;}
+.nav-search input{width:100%;background:var(--dark3);border:1px solid rgba(201,168,76,0.15);border-radius:var(--radius-sm);padding:9px 16px 9px 38px;color:var(--text);font-size:14px;font-family:'DM Sans',sans-serif;outline:none;transition:border-color .2s;}
+.nav-search input:focus{border-color:rgba(201,168,76,0.4);}
+.nav-search input::placeholder{color:var(--text3);}
+.nav-search-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--text3);}
+.nav-right{display:flex;align-items:center;gap:10px;margin-left:auto;}
+.nav-btn-back{padding:0 14px;height:34px;background:transparent;border:1px solid rgba(201,168,76,0.2);border-radius:var(--radius-sm);color:var(--text2);font-size:13px;cursor:pointer;font-family:'DM Sans',sans-serif;display:flex;align-items:center;gap:6px;text-decoration:none;transition:all .2s;}
+.nav-btn-back:hover{border-color:rgba(201,168,76,0.4);color:var(--text);}
+.cart-btn{display:flex;align-items:center;gap:8px;padding:0 16px;height:36px;background:linear-gradient(135deg,var(--gold),var(--gold-dark));border:none;border-radius:var(--radius-sm);color:var(--dark);font-size:13px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:opacity .2s;position:relative;}
+.cart-btn:hover{opacity:.88;}
+.cart-count{background:var(--dark);color:var(--gold);border-radius:20px;padding:1px 6px;font-size:11px;font-weight:700;}
+#nav-auth-area button,.nav-auth-btn{padding:0 14px;height:34px;background:linear-gradient(135deg,var(--gold),var(--gold-dark));border:none;border-radius:var(--radius-sm);color:var(--dark);font-size:13px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;}
+/* LAYOUT */
+.shop-layout{display:flex;min-height:calc(100vh - 60px);max-width:1400px;margin:0 auto;}
+/* SIDEBAR */
+.sidebar{width:240px;flex-shrink:0;padding:20px 16px;border-right:1px solid rgba(201,168,76,0.1);background:var(--dark2);position:sticky;top:60px;height:calc(100vh - 60px);overflow-y:auto;}
+.sidebar::-webkit-scrollbar{width:4px;}
+.sidebar::-webkit-scrollbar-thumb{background:rgba(201,168,76,0.2);border-radius:2px;}
+.filter-section{margin-bottom:24px;}
+.filter-title{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);margin-bottom:10px;padding-left:10px;}
+.filter-item{display:flex;align-items:center;gap:8px;padding:7px 10px;border-radius:var(--radius-sm);cursor:pointer;transition:all .15s;font-size:13px;color:var(--text2);margin-bottom:1px;user-select:none;}
+.filter-item:hover{background:rgba(201,168,76,0.06);color:var(--text);}
+.filter-item.active{background:rgba(201,168,76,0.1);color:var(--gold);font-weight:500;}
+.filter-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+.cat-count{margin-left:auto;font-size:10px;color:var(--text3);background:var(--dark3);padding:1px 6px;border-radius:20px;}
+.filter-item.active .cat-count{color:var(--gold);background:rgba(201,168,76,0.12);}
+.price-slider{padding:0 4px;}
+.price-slider input[type=range]{width:100%;accent-color:var(--gold);cursor:pointer;}
+.price-vals{display:flex;justify-content:space-between;font-size:11px;color:var(--text3);margin-top:4px;}
+.type-btns{display:flex;gap:6px;}
+.type-btn{flex:1;padding:6px;border-radius:var(--radius-sm);font-size:11px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;border:1px solid rgba(201,168,76,0.15);background:transparent;color:var(--text2);transition:all .15s;}
+.type-btn.active{background:rgba(201,168,76,0.12);color:var(--gold);border-color:rgba(201,168,76,0.3);}
+/* MAIN */
+.shop-main{flex:1;padding:20px 24px;min-width:0;}
+.shop-topbar{display:flex;align-items:center;gap:12px;margin-bottom:18px;flex-wrap:wrap;}
+.result-count{font-size:13px;color:var(--text3);flex:1;}
+.result-count strong{color:var(--gold);}
+.sort-select{background:var(--surface);border:1px solid rgba(201,168,76,0.15);border-radius:var(--radius-sm);padding:8px 12px;color:var(--text2);font-size:13px;font-family:'DM Sans',sans-serif;outline:none;cursor:pointer;}
+.view-btns{display:flex;gap:4px;}
+.view-btn{width:32px;height:32px;background:var(--surface);border:1px solid rgba(201,168,76,0.12);border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text3);transition:all .15s;}
+.view-btn.active{border-color:rgba(201,168,76,0.35);color:var(--gold);}
+/* PRODUCT GRID */
+.products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:14px;}
+.products-list{display:flex;flex-direction:column;gap:8px;}
+.prod-card{background:var(--surface);border:1px solid rgba(201,168,76,0.08);border-radius:var(--radius);overflow:hidden;cursor:pointer;transition:all .2s;}
+.prod-card:hover{border-color:rgba(201,168,76,0.28);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,0.3);}
+.prod-img{height:120px;display:flex;align-items:center;justify-content:center;font-size:42px;background:var(--dark3);position:relative;}
+.badge-rx{position:absolute;top:7px;left:7px;background:rgba(226,75,74,0.15);border:1px solid rgba(226,75,74,0.3);color:#F09595;font-size:8px;font-weight:700;padding:2px 6px;border-radius:20px;letter-spacing:.8px;}
+.badge-otc{position:absolute;top:7px;left:7px;background:rgba(29,158,117,0.12);border:1px solid rgba(29,158,117,0.25);color:#5DCAA5;font-size:8px;font-weight:700;padding:2px 6px;border-radius:20px;letter-spacing:.8px;}
+.prod-body{padding:11px;}
+.prod-name{font-size:12px;font-weight:500;line-height:1.35;margin-bottom:4px;color:var(--text);}
+.prod-cat{font-size:10px;color:var(--text3);margin-bottom:8px;}
+.prod-footer{display:flex;align-items:center;justify-content:space-between;}
+.prod-price{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:700;color:var(--gold);}
+.add-btn{width:26px;height:26px;background:linear-gradient(135deg,var(--gold),var(--gold-dark));border-radius:6px;border:none;color:var(--dark);font-size:15px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:opacity .15s;}
+.add-btn:hover{opacity:.85;}
+/* List view */
+.prod-card-list{background:var(--surface);border:1px solid rgba(201,168,76,0.08);border-radius:var(--radius);padding:14px 16px;display:flex;align-items:center;gap:14px;cursor:pointer;transition:all .2s;}
+.prod-card-list:hover{border-color:rgba(201,168,76,0.25);}
+.prod-list-icon{width:44px;height:44px;background:var(--dark3);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
+.prod-list-info{flex:1;min-width:0;}
+.prod-list-name{font-size:13px;font-weight:500;margin-bottom:2px;}
+.prod-list-cat{font-size:11px;color:var(--text3);}
+.prod-list-right{display:flex;align-items:center;gap:12px;flex-shrink:0;}
+.prod-list-price{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:700;color:var(--gold);}
+/* PAGINATION */
+.pagination{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:28px;padding-bottom:32px;}
+.pag-btn{width:36px;height:36px;border-radius:var(--radius-sm);border:1px solid rgba(201,168,76,0.15);background:var(--surface);color:var(--text2);font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;}
+.pag-btn:hover{border-color:rgba(201,168,76,0.35);color:var(--text);}
+.pag-btn.active{background:rgba(201,168,76,0.12);color:var(--gold);border-color:rgba(201,168,76,0.35);}
+.pag-btn:disabled{opacity:.3;cursor:not-allowed;}
+.pag-info{font-size:12px;color:var(--text3);margin:0 8px;}
+/* CART DRAWER */
+.cart-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:300;}
+.cart-overlay.open{display:block;}
+.cart-drawer{position:fixed;top:0;right:0;width:380px;height:100vh;background:var(--dark2);border-left:1px solid rgba(201,168,76,0.15);z-index:301;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .3s;}
+.cart-drawer.open{transform:none;}
+.cart-hdr{padding:18px 22px;border-bottom:1px solid rgba(201,168,76,0.1);display:flex;justify-content:space-between;align-items:center;}
+.cart-title{font-size:16px;font-weight:600;}
+.cart-close{background:transparent;border:none;color:var(--text2);font-size:20px;cursor:pointer;width:30px;height:30px;display:flex;align-items:center;justify-content:center;border-radius:4px;}
+.cart-close:hover{color:var(--text);background:rgba(255,255,255,0.06);}
+.cart-items{flex:1;overflow-y:auto;padding:14px 22px;}
+.cart-items::-webkit-scrollbar{width:4px;}
+.cart-items::-webkit-scrollbar-thumb{background:rgba(201,168,76,0.2);border-radius:2px;}
+.cart-item{display:flex;gap:10px;padding:11px 0;border-bottom:1px solid rgba(201,168,76,0.06);}
+.ci-icon{width:42px;height:42px;background:var(--dark3);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+.ci-info{flex:1;min-width:0;}
+.ci-name{font-size:12px;font-weight:500;line-height:1.3;margin-bottom:4px;}
+.ci-price{font-size:12px;color:var(--gold);}
+.ci-qty{display:flex;align-items:center;gap:7px;margin-top:5px;}
+.qty-btn{width:20px;height:20px;background:var(--dark4);border:none;border-radius:4px;color:var(--text);font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+.qty-val{font-size:12px;min-width:14px;text-align:center;}
+.ci-remove{background:transparent;border:none;color:var(--text3);font-size:14px;cursor:pointer;padding:2px;margin-left:auto;align-self:flex-start;flex-shrink:0;}
+.ci-remove:hover{color:#F09595;}
+.cart-footer{padding:18px 22px;border-top:1px solid rgba(201,168,76,0.1);}
+.cart-summary{margin-bottom:14px;}
+.cart-sum-row{display:flex;justify-content:space-between;font-size:13px;color:var(--text2);margin-bottom:6px;}
+.cart-total{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:var(--gold);}
+.checkout-btn{width:100%;background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:var(--dark);border:none;padding:13px;border-radius:var(--radius-sm);font-size:14px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:opacity .2s;}
+.checkout-btn:hover{opacity:.88;}
+.checkout-btn:disabled{opacity:.5;cursor:not-allowed;}
+.cart-note{text-align:center;margin-top:10px;font-size:11px;color:var(--text3);}
+.empty-cart{text-align:center;padding:48px 0;color:var(--text3);}
+.empty-cart-icon{font-size:48px;margin-bottom:14px;}
+/* CHECKOUT MODAL */
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:400;align-items:center;justify-content:center;padding:20px;}
+.modal-bg.open{display:flex;}
+.modal-box{background:var(--dark2);border:1px solid rgba(201,168,76,0.2);border-radius:18px;padding:36px;width:100%;max-width:480px;max-height:90vh;overflow-y:auto;position:relative;}
+.modal-close{position:absolute;top:14px;right:14px;background:transparent;border:none;color:var(--text2);font-size:20px;cursor:pointer;padding:4px;border-radius:4px;}
+.modal-close:hover{color:var(--text);}
+.modal-title{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:700;margin-bottom:6px;}
+.modal-sub{font-size:13px;color:var(--text2);margin-bottom:24px;}
+.form-group{margin-bottom:14px;}
+.form-label{font-size:11px;color:var(--text2);margin-bottom:5px;display:block;font-weight:500;}
+.form-input{width:100%;background:var(--dark3);border:1px solid rgba(201,168,76,0.15);border-radius:var(--radius-sm);padding:10px 13px;color:var(--text);font-size:14px;font-family:'DM Sans',sans-serif;outline:none;transition:border-color .2s;}
+.form-input:focus{border-color:rgba(201,168,76,0.45);}
+.form-input::placeholder{color:var(--text3);}
+.form-submit{width:100%;background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:var(--dark);border:none;padding:12px;border-radius:var(--radius-sm);font-size:14px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;margin-top:6px;transition:opacity .2s;}
+.form-submit:hover{opacity:.88;}
+.form-submit:disabled{opacity:.5;cursor:not-allowed;}
+.modal-switch{text-align:center;margin-top:14px;font-size:13px;color:var(--text3);}
+.modal-switch a{color:var(--gold);cursor:pointer;}
+.auth-alert{padding:10px 13px;border-radius:var(--radius-sm);font-size:12px;margin-bottom:14px;display:none;}
+.auth-alert.error{background:rgba(226,75,74,0.1);border:1px solid rgba(226,75,74,0.25);color:#F09595;}
+.auth-alert.success{background:rgba(29,158,117,0.1);border:1px solid rgba(29,158,117,0.25);color:#5DCAA5;}
+.pay-opts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px;}
+.pay-opt{padding:10px;border:1px solid rgba(201,168,76,0.15);border-radius:var(--radius-sm);cursor:pointer;text-align:center;font-size:12px;font-weight:500;transition:all .15s;}
+.pay-opt:hover{border-color:rgba(201,168,76,0.35);}
+.pay-opt.active{border-color:var(--gold);background:rgba(201,168,76,0.08);color:var(--gold);}
+.pay-icon{font-size:20px;margin-bottom:4px;display:block;}
+.order-success{text-align:center;padding:20px 0;}
+.order-success-icon{font-size:56px;margin-bottom:16px;}
+.order-success h3{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:700;margin-bottom:8px;}
+.order-success p{font-size:14px;color:var(--text2);line-height:1.6;}
+/* TOAST */
+#toast-container{position:fixed;bottom:20px;right:20px;z-index:9999;display:flex;flex-direction:column;gap:7px;pointer-events:none;}
+.toast{background:var(--surface);border-radius:var(--radius-sm);padding:11px 16px;font-size:13px;max-width:320px;pointer-events:auto;animation:toastIn .25s ease;border-left:3px solid var(--gold);color:var(--text);}
+.toast.success{border-left-color:#1D9E75;color:#5DCAA5;}
+.toast.error{border-left-color:#E24B4A;color:#F09595;}
+@keyframes toastIn{from{opacity:0;transform:translateX(12px);}to{opacity:1;transform:none;}}
+
+/* ── DRUG IMAGE CARDS ── */
+.prod-img{height:140px;display:flex;align-items:center;justify-content:center;background:var(--dark3);position:relative;overflow:hidden;}
+.prod-img-photo{width:100%;height:100%;object-fit:contain;padding:8px;background:var(--dark3);}
+.prod-img-emoji{font-size:48px;user-select:none;}
+.prod-img-skeleton{position:absolute;inset:0;background:linear-gradient(90deg,var(--dark3) 25%,rgba(201,168,76,0.08) 50%,var(--dark3) 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+
+/* ── LOCATION PICKER MODAL ── */
+#loc-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.82);z-index:600;align-items:flex-end;justify-content:center;padding-bottom:0;}
+#loc-modal.open{display:flex;}
+#loc-modal-box{background:var(--dark2);border-radius:18px 18px 0 0;width:100%;max-width:600px;max-height:92vh;display:flex;flex-direction:column;overflow:hidden;border-top:1px solid rgba(201,168,76,0.15);}
+#loc-modal-hdr{padding:16px 20px 12px;border-bottom:1px solid rgba(201,168,76,0.1);display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
+#loc-modal-hdr h3{font-size:16px;font-weight:600;}
+#loc-map{height:260px;flex-shrink:0;background:#1a1a2a;}
+#loc-bottom{padding:14px 20px 20px;flex:1;overflow-y:auto;}
+.loc-address-bar{display:flex;align-items:center;gap:8px;background:var(--dark3);border:1px solid rgba(201,168,76,0.2);border-radius:10px;padding:10px 14px;margin-bottom:12px;}
+.loc-address-txt{flex:1;font-size:13px;color:var(--text);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.loc-my-btn{display:flex;align-items:center;gap:8px;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.25);border-radius:10px;padding:10px 14px;cursor:pointer;font-size:13px;font-weight:500;color:var(--gold);width:100%;margin-bottom:12px;transition:all .2s;}
+.loc-my-btn:hover{background:rgba(201,168,76,0.18);}
+.loc-quick-label{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--text3);margin-bottom:8px;}
+.loc-quick-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px;}
+.loc-quick-btn{background:var(--dark3);border:1px solid rgba(201,168,76,0.1);border-radius:8px;padding:9px 8px;cursor:pointer;font-size:12px;color:var(--text2);text-align:center;transition:all .15s;}
+.loc-quick-btn:hover,.loc-quick-btn.active{border-color:rgba(201,168,76,0.4);color:var(--gold);background:rgba(201,168,76,0.07);}
+.loc-confirm-btn{width:100%;background:linear-gradient(135deg,#C9A84C,#8B6914);color:#0A0A0F;border:none;padding:13px;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;}
+.loc-input-wrap{display:flex;flex-direction:column;gap:6px;margin-bottom:12px;}
+.loc-input{width:100%;background:var(--dark3);border:1px solid rgba(201,168,76,0.15);border-radius:8px;padding:10px 13px;color:var(--text);font-size:13px;outline:none;font-family:'DM Sans',sans-serif;}
+.loc-input:focus{border-color:rgba(201,168,76,0.4);}
+.loc-spinner{display:inline-block;width:14px;height:14px;border:2px solid rgba(201,168,76,0.3);border-top-color:var(--gold);border-radius:50%;animation:spin .7s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ── CHECKOUT: user info strip ── */
+.co-user-strip{display:flex;align-items:center;gap:10px;background:rgba(29,158,117,0.08);border:1px solid rgba(29,158,117,0.18);border-radius:8px;padding:10px 13px;margin-bottom:16px;font-size:12px;color:#5DCAA5;}
+.co-user-av{width:28px;height:28px;background:linear-gradient(135deg,var(--gold),var(--gold-dark));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--dark);flex-shrink:0;}
+
+/* PROMO BANNER */
+.promo-bar{background:linear-gradient(90deg,rgba(201,168,76,0.12),rgba(201,168,76,0.06));border-bottom:1px solid rgba(201,168,76,0.15);padding:8px 24px;text-align:center;font-size:12px;color:var(--text2);}
+.promo-bar strong{color:var(--gold);}
+/* RESPONSIVE */
+@media(max-width:900px){
+  .sidebar{display:none;}
+  .shop-layout{max-width:100%;}
+}
+@media(max-width:600px){
+  .nav-search{display:none;}
+  .shop-main{padding:14px 16px;}
+  .products-grid{grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:10px;}
+  .cart-drawer{width:100%;}
+}
+/* ═══════════════════════════════════════
+   SHOP PAGE MOBILE OPTIMIZATION
+═══════════════════════════════════════ */
+
+/* Prevent sideways scroll */
+body {
+  overflow-x: hidden;
+}
+
+/* ───────── PRODUCT GRID ───────── */
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+@media (max-width: 1024px) {
+  .products-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+}
+
+/* ───────── PRODUCT CARD ───────── */
+
+.product-card {
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.product-card h3 {
+  font-size: 13px;
+}
+
+.product-card p {
+  font-size: 12px;
+}
+
+/* ───────── SEARCH BAR ───────── */
+
+.search-bar {
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .search-bar {
+    margin-bottom: 10px;
+  }
+}
+
+/* ───────── FILTERS ───────── */
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.filters button {
+  flex: 1;
+  min-width: 100px;
+  font-size: 12px;
+}
+
+/* ───────── CART SIDEBAR ───────── */
+
+.cart-sidebar {
+  width: 350px;
+}
+
+@media (max-width: 768px) {
+  .cart-sidebar {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 80%;
+    border-radius: 14px 14px 0 0;
+    overflow-y: auto;
+  }
+}
+
+/* ───────── CART ITEMS ───────── */
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 13px;
+}
+
+/* ───────── CHECKOUT BUTTON ───────── */
+
+.checkout-btn {
+  width: 100%;
+  min-height: 48px;
+  font-size: 14px;
+}
+
+/* ───────── MODAL FIX ───────── */
+
+.modal-box {
+  width: 90%;
+  max-width: 420px;
+  margin: auto;
+}
+
+@media (max-width: 480px) {
+  .modal-box {
+    width: 95%;
+  }
+}
+
+/* ───────── NAVBAR MOBILE ───────── */
+
+@media (max-width: 768px) {
+  .nav-links {
+    display: none !important;
+  }
+
+  .mobile-menu {
+    display: block;
+  }
+}
+
+/* ───────── HERO SECTION ───────── */
+
+.hero {
+  padding: 40px 20px;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 20px 12px;
+  }
+
+  .hero h1 {
+    font-size: 22px;
+  }
+
+  .hero p {
+    font-size: 13px;
+  }
+}
+
+/* ───────── BUTTONS TOUCH FRIENDLY ───────── */
+
+button {
+  min-height: 44px;
+}
+
+/* ───────── TEXT SCALING ───────── */
+
+h1 { font-size: clamp(20px, 5vw, 32px); }
+h2 { font-size: clamp(18px, 4vw, 26px); }
+p  { font-size: clamp(13px, 3.5vw, 15px); }
+
+.floating-cart {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #C9A84C;
+  color: #0A0A0F;
+  border: none;
+  border-radius: 50%;
+  width: 55px;
+  height: 55px;
+  font-size: 20px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+  z-index: 999;
+}
+
+@media (min-width: 769px) {
+  .floating-cart {
+    display: none;
+  }
+}
+
+</style>
+</head>
+<body>
+<h1 class="sr-only">Kerich Pharmaceuticals — Shop Medicines Online in Nairobi</h1>
+
+<div class="promo-bar"><strong>FREE delivery</strong> on orders over KES <span id="promo-free-threshold">2,000</span> · <span id="promo-count">medicines</span> in stock · Delivered in <strong>48 minutes</strong></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a class="logo-wrap" href="index.html">
+      <div class="logo-mark">K</div>
+      <div><div class="logo-tag">Kerich</div><div class="logo-tag">Pharmaceuticals</div></div>
+    </a>
+    <div class="nav-search">
+      <svg class="nav-search-icon" width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+      <input type="text" id="search-input" placeholder="Search medicines, brands, conditions..." oninput="onSearch()">
+    </div>
+    <div class="nav-right">
+      <a class="nav-btn-back" href="index.html">
+        <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+        Home
+      </a>
+      <div id="nav-auth-area">
+        <button class="nav-auth-btn" onclick="openCheckout()">Sign In</button>
+      </div>
+      <button class="cart-btn" onclick="openCart()">
+        <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+        Cart <span class="cart-count" id="cart-count">0</span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- LAYOUT -->
+<div class="shop-layout">
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="filter-section">
+      <div class="filter-title">Categories</div>
+<div class="filter-item active" onclick="filterCat(this,'all')"><div class="filter-dot" style="background:var(--gold);"></div>All Products <span class="cat-count" id="count-all"></span></div>
+        <div class="filter-item" onclick="filterCat(this,'Cough & Cold')"><div class="filter-dot" style="background:#378ADD;"></div>Cough & Cold <span class="cat-count" id="count-Cough__Cold"></span></div>
+        <div class="filter-item" onclick="filterCat(this,'Vitamins & Supplements')"><div class="filter-dot" style="background:#1D9E75;"></div>Vitamins & Supplements <span class="cat-count" id="count-Vitamins__Supplements"></span></div>
+        <div class="filter-item" onclick="filterCat(this,'Stomach & Digestive')"><div class="filter-dot" style="background:#BA7517;"></div>Stomach & Digestive <span class="cat-count" id="count-Stomach__Digestive"></span></div>
+        <div class="filter-item" onclick="filterCat(this,'First Aid')"><div class="filter-dot" style="background:#378ADD;"></div>First Aid <span class="cat-count" id="count-First_Aid"></span></div>
+        <div class="filter-item" onclick="filterCat(this,'Pain & Fever')"><div class="filter-dot" style="background:#E24B4A;"></div>Pain & Fever <span class="cat-count" id="count-Pain__Fever"></span></div>
+        <div class="filter-item" onclick="filterCat(this,'Skin Care')"><div class="filter-dot" style="background:#D85A30;"></div>Skin Care <span class="cat-count" id="count-Skin_Care"></span></div>
+        <div class="filter-item" onclick="filterCat(this,'Eye & Ear Care')"><div class="filter-dot" style="background:#5DCAA5;"></div>Eye & Ear Care <span class="cat-count" id="count-Eye__Ear_Care"></span></div>
+        <div class="filter-item" onclick="filterCat(this,'Women&#39;s Health')"><div class="filter-dot" style="background:#D4537E;"></div>Women&#39;s Health <span class="cat-count" id="count-Womens_Health"></span></div>
+        <div class="filter-item" onclick="filterCat(this,'Oral Health')"><div class="filter-dot" style="background:#5DCAA5;"></div>Oral Health <span class="cat-count" id="count-Oral_Health"></span></div>
+        <div class="filter-item" onclick="filterCat(this,'Men&#39;s Health')"><div class="filter-dot" style="background:#378ADD;"></div>Men&#39;s Health <span class="cat-count" id="count-Mens_Health"></span></div>
+        <div class="filter-item" onclick="filterCat(this,'Antifungals')"><div class="filter-dot" style="background:#C9A84C;"></div>Antifungals <span class="cat-count" id="count-Antifungals"></span></div>
+        <div class="filter-item" onclick="filterCat(this,'Baby & Kids')"><div class="filter-dot" style="background:#C9A84C;"></div>Baby & Kids <span class="cat-count" id="count-Baby__Kids"></span></div>
+        <div class="filter-item" onclick="filterCat(this,'Antihypertensives')"><div class="filter-dot" style="background:#D4537E;"></div>Antihypertensives <span class="cat-count" id="count-Antihypertensives"></span></div>
+        <div class="filter-item" onclick="filterCat(this,'General Oral Meds')"><div class="filter-dot" style="background:#E24B4A;"></div>General Oral Meds <span class="cat-count" id="count-General_Oral_Meds"></span></div>
+        <div class="filter-item" onclick="filterCat(this,'Lubricants and Oils')"><div class="filter-dot" style="background:#7A7468;"></div>Lubricants and Oils <span class="cat-count" id="count-Lubricants_and_Oils"></span></div>
+        <div class="filter-item" onclick="filterCat(this,'Hair Care')"><div class="filter-dot" style="background:#BA7517;"></div>Hair Care <span class="cat-count" id="count-Hair_Care"></span></div>
+        <div class="filter-item" onclick="filterCat(this,'Quit Smoking')"><div class="filter-dot" style="background:#686068;"></div>Quit Smoking <span class="cat-count" id="count-Quit_Smoking"></span></div>
+        <div class="filter-item" onclick="filterCat(this,'Sleep & Stress')"><div class="filter-dot" style="background:#7A6CC0;"></div>Sleep & Stress <span class="cat-count" id="count-Sleep__Stress"></span></div>
+        <div class="filter-item" onclick="filterCat(this,'Antibiotics')"><div class="filter-dot" style="background:#E24B4A;"></div>Antibiotics <span class="cat-count" id="count-Antibiotics"></span></div>
+        <div class="filter-item" onclick="filterCat(this,'Intimate Health')"><div class="filter-dot" style="background:#7A7468;"></div>Intimate Health <span class="cat-count" id="count-Intimate_Health"></span></div>
+        <div class="filter-item" onclick="filterCat(this,'Circulation and Hemorrhoids')"><div class="filter-dot" style="background:#7A7468;"></div>Circulation and Hemorrhoids <span class="cat-count" id="count-Circulation_and_Hemorrhoids"></span></div>
+        <div class="filter-item" onclick="filterCat(this,'Lip care')"><div class="filter-dot" style="background:#7A7468;"></div>Lip care <span class="cat-count" id="count-Lip_care"></span></div>
+        <div class="filter-item" onclick="filterCat(this,'Candies and Gum')"><div class="filter-dot" style="background:#7A7468;"></div>Candies and Gum <span class="cat-count" id="count-Candies_and_Gum"></span></div>
+        <div class="filter-item" onclick="filterCat(this,'Baking and Condiments')"><div class="filter-dot" style="background:#7A7468;"></div>Baking and Condiments <span class="cat-count" id="count-Baking_and_Condiments"></span></div>
+        <div class="filter-item" onclick="filterCat(this,'Nails Products')"><div class="filter-dot" style="background:#7A7468;"></div>Nails Products <span class="cat-count" id="count-Nails_Products"></span></div>
+        <div class="filter-item" onclick="filterCat(this,'Deodorants')"><div class="filter-dot" style="background:#7A7468;"></div>Deodorants <span class="cat-count" id="count-Deodorants"></span></div>
+        <div class="filter-item" onclick="filterCat(this,'Body Oils')"><div class="filter-dot" style="background:#7A7468;"></div>Body Oils <span class="cat-count" id="count-Body_Oils"></span></div>
+        <div class="filter-item" onclick="filterCat(this,'Insect Repellent')"><div class="filter-dot" style="background:#7A7468;"></div>Insect Repellent <span class="cat-count" id="count-Insect_Repellent"></span></div>
+        <div class="filter-item" onclick="filterCat(this,'Foot Care')"><div class="filter-dot" style="background:#7A7468;"></div>Foot Care <span class="cat-count" id="count-Foot_Care"></span></div>
+        <div class="filter-item" onclick="filterCat(this,'Medications')"><div class="filter-dot" style="background:#7A7468;"></div>Medications <span class="cat-count" id="count-Medications"></span></div>
+        <div class="filter-item" onclick="filterCat(this,'Miscellaneous General Supplies')"><div class="filter-dot" style="background:#7A7468;"></div>Miscellaneous General Supplies <span class="cat-count" id="count-Miscellaneous_General_Supplies"></span></div>
+    </div>
+    <div class="filter-section">
+      <div class="filter-title">Type</div>
+      <div class="type-btns">
+        <button class="type-btn active" onclick="setType(this,'all')">All</button>
+        <button class="type-btn" onclick="setType(this,'otc')">OTC</button>
+        <button class="type-btn" onclick="setType(this,'rx')">Rx</button>
+      </div>
+    </div>
+    <div class="filter-section">
+      <div class="filter-title">Price (KES)</div>
+      <div class="price-slider">
+        <input type="range" min="0" max="16000" value="16000" step="100" id="price-slider" oninput="onPriceChange(this)">
+        <div class="price-vals"><span>KES 0</span><span id="price-max-label">KES 16,000</span></div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="shop-main">
+    <div class="shop-topbar">
+      <div class="result-count" id="result-count">Loading…</div>
+      <select class="sort-select" id="sort-select" onchange="applySort()">
+        <option value="default">Sort: Default</option>
+        <option value="price-asc">Price: Low → High</option>
+        <option value="price-desc">Price: High → Low</option>
+        <option value="name-asc">Name: A–Z</option>
+      </select>
+      <div class="view-btns">
+        <div class="view-btn active" id="view-grid" onclick="setView('grid')" title="Grid">
+          <svg width="13" height="13" fill="currentColor" viewBox="0 0 16 16"><path d="M1 2.5A1.5 1.5 0 012.5 1h3A1.5 1.5 0 017 2.5v3A1.5 1.5 0 015.5 7h-3A1.5 1.5 0 011 5.5v-3zm8 0A1.5 1.5 0 0110.5 1h3A1.5 1.5 0 0115 2.5v3A1.5 1.5 0 0113.5 7h-3A1.5 1.5 0 019 5.5v-3zm-8 8A1.5 1.5 0 012.5 9h3A1.5 1.5 0 017 10.5v3A1.5 1.5 0 015.5 15h-3A1.5 1.5 0 011 13.5v-3zm8 0A1.5 1.5 0 0110.5 9h3A1.5 1.5 0 0115 10.5v3A1.5 1.5 0 0113.5 15h-3A1.5 1.5 0 019 13.5v-3z"/></svg>
+        </div>
+        <div class="view-btn" id="view-list" onclick="setView('list')" title="List">
+          <svg width="13" height="13" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M2.5 12a.5.5 0 01.5-.5h10a.5.5 0 010 1H3a.5.5 0 01-.5-.5zm0-4a.5.5 0 01.5-.5h10a.5.5 0 010 1H3a.5.5 0 01-.5-.5zm0-4a.5.5 0 01.5-.5h10a.5.5 0 010 1H3a.5.5 0 01-.5-.5z"/></svg>
+        </div>
+      </div>
+    </div>
+    <div id="products-container"></div>
+    <div class="pagination" id="pagination"></div>
+  </main>
+</div>
+
+<!-- CART DRAWER -->
+<div class="cart-overlay" id="cart-overlay" onclick="closeCart()"></div>
+<div class="cart-drawer" id="cart-drawer">
+  <div class="cart-hdr">
+    <div class="cart-title">Your Cart</div>
+    <button class="cart-close" onclick="closeCart()">✕</button>
+  </div>
+  <div class="cart-items" id="cart-items"></div>
+  <div class="cart-footer" id="cart-footer"></div>
+</div>
+
+<!-- MODAL (auth + checkout) -->
+<div class="modal-bg" id="modal-bg">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <!-- LOGIN -->
+     <section>
+    <div id="modal-login">
+      <div class="modal-title">Sign In</div>
+      <div class="modal-sub">Sign in to complete your order</div>
+      <div class="auth-alert error" id="login-err"></div>
+      <div class="form-group"><label class="form-label">Email</label><input id="l-email" class="form-input" type="email" placeholder="you@email.com"></div>
+      <div class="form-group"><label class="form-label">Password</label><input id="l-pass" class="form-input" type="password" placeholder="Your password"></div>
+      <button class="form-submit" id="login-btn" onclick="doLogin()">Sign In</button>
+      <div class="modal-switch">No account? <a onclick="showModal('register')">Register free</a></div>
+    </div>
+  </section>
+    <!-- REGISTER -->
+     <section>
+    <div id="modal-register" class="hidden">
+      <div class="modal-title">Create Account</div>
+      <div class="modal-sub">Join Kerich to order medicines</div>
+      <div class="auth-alert error" id="reg-err"></div>
+      <div class="form-group"><label class="form-label">Full Name</label><input id="r-name" class="form-input" type="text" placeholder="James Kerich"></div>
+      <div class="form-group"><label class="form-label">Phone</label><input id="r-phone" class="form-input" type="tel" placeholder="+254 7XX XXX XXX"></div>
+      <div class="form-group"><label class="form-label">Email</label><input id="r-email" class="form-input" type="email" placeholder="you@email.com"></div>
+      <div class="form-group"><label class="form-label">Password</label><input id="r-pass" class="form-input" type="password" placeholder="Min. 8 characters"></div>
+      <button class="form-submit" id="reg-btn" onclick="doRegister()">Create Account</button>
+      <div class="modal-switch">Already have one? <a onclick="showModal('login')">Sign in</a></div>
+    </div>
+  </section>
+    <!-- CHECKOUT -->
+     <section>
+    <div id="modal-checkout" class="hidden">
+      <div class="modal-title">Checkout</div>
+      <div id="co-user-strip" class="co-user-strip" style="display:none;">
+        <div class="co-user-av" id="co-user-av">—</div>
+        <div><div id="co-user-name" style="font-weight:600;">—</div><div id="co-user-email" style="opacity:.7;">—</div></div>
+        <div style="margin-left:auto;opacity:.7;">✓ Signed in</div>
+      </div>
+      <div class="form-group">
+        <label class="form-label"><b>Delivery Location (Press the pin to use map or get your  current location)</b></label>
+        <div style="display:flex;gap:8px;">
+          <input id="co-address" class="form-input" type="text" placeholder="Enter your delivery address" style="flex:1;">
+          <button type="button" onclick="openLocPicker()" style="background:rgba(201,168,76,0.12);border:1px solid rgba(201,168,76,0.28);border-radius:var(--radius-sm);padding:0 12px;color:var(--gold);font-size:18px;cursor:pointer;flex-shrink:0;" title="Pick on map">📍</button>
+        </div>
+        <div id="co-address-detail" style="font-size:11px;color:var(--text3);margin-top:4px;display:none;"></div>
+      </div>
+      <div class="form-group"><label class="form-label">Phone Number</label><input id="co-phone" class="form-input" type="tel" placeholder="+254 7XX XXX XXX"></div>
+      <div class="form-group"><label class="form-label">Notes (optional)</label><input id="co-notes" class="form-input" type="text" placeholder="Special instructions, apartment number…"></div>
+      <div class="form-group">
+        <label class="form-label">Payment Method</label>
+        <div class="pay-opts">
+          <div class="pay-opt active" onclick="selectPay(this,'mpesa')" data-method="mpesa"><span class="pay-icon">📱</span>M-Pesa</div>
+          <div class="pay-opt" onclick="selectPay(this,'card')" data-method="card"><span class="pay-icon">💳</span>Card</div>
+          <div class="pay-opt" onclick="selectPay(this,'insurance')" data-method="insurance"><span class="pay-icon">🏥</span>Insurance</div>
+          <div class="pay-opt" onclick="selectPay(this,'cash')" data-method="cash"><span class="pay-icon">💵</span>Cash on Delivery</div>
+        </div>
+      </div>
+      <input type="hidden" id="co-lat">
+      <input type="hidden" id="co-lng">
+      <div id="co-total-display" style="background:var(--dark3);border-radius:var(--radius-sm);padding:12px 14px;margin-bottom:14px;font-size:13px;color:var(--text2);"></div>
+      <button class="form-submit" id="place-order-btn" onclick="placeOrder()">Place Order</button>
+      <div class="cart-note" style="margin-top:12px;">🔒 Secure checkout · PCI-DSS compliant</div>
+    </div>
+  </section>
+    <!-- ORDER SUCCESS -->
+     <section>
+    <div id="modal-success" class="hidden">
+      <div class="order-success">
+        <div class="order-success-icon">🎉</div>
+        <h3>Order Placed!</h3>
+        <p id="success-msg">Your order has been placed successfully. You will receive an SMS confirmation shortly.</p>
+        <button class="form-submit" style="margin-top:20px;" onclick="closeModal()">Continue Shopping</button>
+        <div style="margin-top:12px;"><a href="index.html" style="color:var(--gold);font-size:13px;">View My Orders →</a></div>
+      </div>
+    </div>
+  </section>
+  </div>
+</div>
+
+<div id="toast-container"></div>
+<!-- FIREBASE SDK -->
+<script type="module">
+import { initializeApp }  from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAnalytics }   from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
+import {
+  getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,
+  signOut, onAuthStateChanged, updateProfile
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import {
+  getFirestore, collection, doc, setDoc, addDoc,
+  serverTimestamp, getDoc, increment, arrayUnion
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const FIREBASE_CONFIG = {
+  apiKey:"AIzaSyDkSTdMVyBonlpRWy6xXm-eNpdAG0hJy9s",
+  authDomain:"kerich-4aefa.firebaseapp.com",
+  projectId:"kerich-4aefa",
+  storageBucket:"kerich-4aefa.firebasestorage.app",
+  messagingSenderId:"1065143450049",
+  appId:"1:1065143450049:web:188de865640fe170175740",
+  measurementId:"G-PQMPF04N11"
+};
+
+const fbApp  = initializeApp(FIREBASE_CONFIG);
+getAnalytics(fbApp);
+const fbAuth = getAuth(fbApp);
+const db     = getFirestore(fbApp);
+
+// ─── State exposed to non-module scripts ─────────────────────────────
+let currentUser  = null;
+let currentToken = null;
+window._shopUser        = null;  // readable by regular scripts
+window._pendingCheckout = false; // set before login if user clicked checkout
+
+// ─── Auth state ───────────────────────────────────────────────────────
+onAuthStateChanged(fbAuth, async user => {
+  currentUser      = user;
+  window._shopUser = user;
+
+  const area = document.getElementById('nav-auth-area');
+
+  if (user) {
+    currentToken = await user.getIdToken(true);
+    setInterval(async () => { currentToken = await user.getIdToken(true); }, 50 * 60 * 1000);
+
+    const init = (user.displayName||user.email||'U').split(' ').map(w=>w[0]).slice(0,2).join('').toUpperCase();
+    area.innerHTML = `
+      <div style="display:flex;align-items:center;gap:8px;cursor:pointer;" onclick="handleNavUser()">
+        <div style="width:28px;height:28px;background:linear-gradient(135deg,#C9A84C,#8B6914);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#0A0A0F;">${init}</div>
+        <span style="font-size:13px;color:var(--text2);">${user.displayName||user.email.split('@')[0]}</span>
+      </div>`;
+
+    // Auto-advance to checkout if user was trying to checkout before logging in
+    if (window._pendingCheckout) {
+      window._pendingCheckout = false;
+      setTimeout(() => { closeCart(); populateCheckout(user); showModal('checkout'); }, 200);
+    }
+
+  } else {
+    currentToken = null;
+    area.innerHTML = `<button class="nav-auth-btn" onclick="openCheckout()">Sign In</button>`;
+  }
+});
+
+// Pre-fill checkout with user info and show user strip
+function populateCheckout(user) {
+  const strip   = document.getElementById('co-user-strip');
+  const avEl    = document.getElementById('co-user-av');
+  const nameEl  = document.getElementById('co-user-name');
+  const emailEl = document.getElementById('co-user-email');
+  if (!strip) return;
+  const init = (user.displayName||user.email||'U').split(' ').map(w=>w[0]).slice(0,2).join('').toUpperCase();
+  avEl.textContent    = init;
+  nameEl.textContent  = user.displayName || user.email.split('@')[0];
+  emailEl.textContent = user.email;
+  strip.style.display = 'flex';
+
+  // Pre-fill phone from Firestore profile
+  getDoc(doc(db, 'users', user.uid)).then(snap => {
+    if (snap.exists()) {
+      const phone = snap.data().phoneNumber;
+      const phoneEl = document.getElementById('co-phone');
+      if (phone && phoneEl && !phoneEl.value) phoneEl.value = phone;
+    }
+  }).catch(() => {});
+}
+
+window.handleNavUser = function() {
+  if (currentUser) {
+    if (confirm(`Sign out from ${currentUser.email}?`)) doSignOut();
+  } else openCheckout();
+};
+
+// ─── Login ────────────────────────────────────────────────────────────
+window.doLogin = async function() {
+  const email = document.getElementById('l-email').value.trim();
+  const pass  = document.getElementById('l-pass').value;
+  const btn   = document.getElementById('login-btn');
+  setErr('login-err','');
+  if(!email||!pass){ setErr('login-err','Please enter email and password.'); return; }
+  btn.disabled=true; btn.textContent='Signing in…';
+  try {
+    await signInWithEmailAndPassword(fbAuth, email, pass);
+    // onAuthStateChanged will handle advance to checkout automatically
+    toast('Welcome back!','success');
+  } catch(e) {
+    const m={
+      'auth/user-not-found':     'No account found with this email.',
+      'auth/wrong-password':     'Incorrect password.',
+      'auth/invalid-credential': 'Invalid email or password.',
+      'auth/too-many-requests':  'Too many attempts. Please wait and try again.'
+    };
+    setErr('login-err', m[e.code]||e.message);
+  } finally { btn.disabled=false; btn.textContent='Sign In'; }
+};
+
+// ─── Register ─────────────────────────────────────────────────────────
+window.doRegister = async function() {
+  const name  = document.getElementById('r-name').value.trim();
+  const phone = document.getElementById('r-phone').value.trim();
+  const email = document.getElementById('r-email').value.trim();
+  const pass  = document.getElementById('r-pass').value;
+  const btn   = document.getElementById('reg-btn');
+  setErr('reg-err','');
+  if(!name||!email||!pass){ setErr('reg-err','Please fill in all required fields.'); return; }
+  if(pass.length<8){ setErr('reg-err','Password must be at least 8 characters.'); return; }
+  btn.disabled=true; btn.textContent='Creating account…';
+  try {
+    const cred = await createUserWithEmailAndPassword(fbAuth, email, pass);
+    await updateProfile(cred.user, {displayName:name});
+    await setDoc(doc(db,'users',cred.user.uid), {
+      uid:cred.user.uid, email, displayName:name, phoneNumber:phone||null,
+      role:'patient', status:'active',
+      healthProfile:{bloodGroup:null, allergies:[], conditions:[]},
+      vitals:{},
+      dataConsent:{given:true, timestamp:new Date().toISOString(), version:'2.0', termsAccepted:true},
+      createdAt:serverTimestamp(), updatedAt:serverTimestamp()
+    });
+    toast('Account created! Welcome to Kerich.','success');
+    // onAuthStateChanged fires → auto-advances to checkout
+  } catch(e) {
+    const m={
+      'auth/email-already-in-use':'An account already exists with this email.',
+      'auth/weak-password':        'Password is too weak.'
+    };
+    setErr('reg-err', m[e.code]||e.message);
+  } finally { btn.disabled=false; btn.textContent='Create Account'; }
+};
+
+window.doSignOut = async function() {
+  await signOut(fbAuth);
+  toast('Signed out successfully.','info');
+};
+
+// ─── Place Order ──────────────────────────────────────────────────────
+window.placeOrder = async function() {
+  if (!currentUser) { window._pendingCheckout=true; showModal('login'); return; }
+
+  const address = document.getElementById('co-address').value.trim();
+  const phone   = document.getElementById('co-phone').value.trim();
+  const notes   = document.getElementById('co-notes').value.trim();
+  const method  = document.querySelector('.pay-opt.active')?.dataset.method || 'mpesa';
+  const latEl   = document.getElementById('co-lat');
+  const lngEl   = document.getElementById('co-lng');
+  const lat     = latEl?.value ? parseFloat(latEl.value) : null;
+  const lng     = lngEl?.value ? parseFloat(lngEl.value) : null;
+
+  if (!address) { toast('Please enter or pick your delivery address.','error'); return; }
+  if (!phone)   { toast('Please enter your phone number.','error'); return; }
+
+  const btn = document.getElementById('place-order-btn');
+  btn.disabled=true; btn.textContent='Placing order…';
+
+  try {
+    const cartItems = window.getCart();
+    if (!cartItems.length) { toast('Your cart is empty.','error'); return; }
+
+    const subtotal    = cartItems.reduce((s,c) => s + c.price*c.qty, 0);
+    const deliveryFee = subtotal >= 2000 ? 0 : 150;
+    const total       = subtotal + deliveryFee;
+    const items       = cartItems.map(c => ({
+      productId: c.sku||c.name,
+      name:      c.name,
+      icon:      c.icon||'💊',
+      price:     c.price,
+      quantity:  c.qty,
+      type:      c.type||'otc',
+      cat:       c.cat||''
+    }));
+
+    const ts    = Date.now();
+    const ordId = `KP-${new Date().getFullYear()}-${String(ts).slice(-5)}`;
+
+    await addDoc(collection(db,'orders'), {
+      orderId:      ordId,
+      patientId:    currentUser.uid,
+      patientName:  currentUser.displayName||'',
+      patientEmail: currentUser.email,
+      items,
+      subtotal,
+      deliveryFee,
+      total,
+      deliveryAddress: {
+        street:  address,
+        city:    'Nairobi',
+        country: 'Kenya',
+        lat,
+        lng,
+      },
+      phoneNumber:   phone,
+      notes,
+      paymentMethod: method,
+      paymentStatus: 'pending',
+      status:        'pending',
+      statusHistory: [{
+        status:    'pending',
+        timestamp: new Date().toISOString(),
+        by:        currentUser.uid,
+        note:      'Order placed by patient'
+      }],
+      riderId:      null,
+      estimatedETA: null,
+      createdAt:    serverTimestamp(),
+      updatedAt:    serverTimestamp(),
+    });
+
+    // Audit log
+    await addDoc(collection(db,'audit_logs'), {
+      action:    'ORDER_PLACED',
+      orderId:   ordId,
+      patientId: currentUser.uid,
+      total,
+      itemCount: items.length,
+      timestamp: serverTimestamp()
+    });
+
+    window.clearCart();
+
+    document.getElementById('success-msg').textContent =
+      `Order ${ordId} confirmed! Total: KES ${total.toLocaleString()}${deliveryFee===0?' (free delivery)':''}. `+
+      `You'll receive an SMS on ${phone} shortly.`;
+    showModal('success');
+    toast('Order placed!','success');
+
+  } catch(e) {
+    console.error('Order error:', e);
+    toast('Order failed: '+e.message,'error');
+  } finally {
+    btn.disabled=false;
+    btn.textContent='Place Order';
+  }
+};
+
+function setErr(id, msg) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.textContent   = msg;
+  el.style.display = msg ? 'block' : 'none';
+}
+</script>
+
+<script>
+// ═══════════════════════════════════════════════════════════
+//  PRODUCT DATA — loaded live from Firestore via /api/pharmacy/products
+// ═══════════════════════════════════════════════════════════
+let ALL_PRODUCTS = [];
+
+async function loadPromoConfig() {
+  try {
+    const res = await fetch('/api/pharmacy/config');
+    if (!res.ok) return;
+    const cfg = await res.json();
+    const el = document.getElementById('promo-free-threshold');
+    if (el && cfg.freeDeliveryAbove != null) el.textContent = Number(cfg.freeDeliveryAbove).toLocaleString();
+  } catch (err) {
+    console.error('Promo config load failed:', err);
+  }
+}
+
+async function loadProducts() {
+  const grid = document.getElementById('products-container');
+  if (grid) {
+    grid.innerHTML = `<div style="text-align:center;padding:80px 20px;color:var(--text3);">
+      <div style="font-size:32px;margin-bottom:12px;">⏳</div>
+      <div style="font-size:14px;">Loading the medicine shop…</div>
+    </div>`;
+  }
+  try {
+    const res = await fetch('/api/pharmacy/products?limit=5000');
+    if (!res.ok) throw new Error('Failed to load products (' + res.status + ')');
+    const data = await res.json();
+    // Map Firestore field names -> the shape the rest of this file expects
+    ALL_PRODUCTS = (data.products || []).map(p => ({
+      id:          p.id,
+      sku:         p.sku,
+      name:        p.name,
+      price:       Number(p.price) || 0,
+      cat:         p.category || 'Miscellaneous General Supplies',
+      rawCat:      p.rawCategory || p.category || '',
+      type:        p.type === 'rx' ? 'rx' : 'otc',
+      icon:        p.icon || '💊',
+      image:       p.image || null,
+      description: p.description || null,
+      active:      p.active !== false,
+      stock:       Number(p.stock) || 0,
+    }));
+    const promoCountEl = document.getElementById('promo-count');
+    if (promoCountEl) promoCountEl.textContent = ALL_PRODUCTS.length.toLocaleString() + ' medicines';
+  } catch (err) {
+    console.error('Product load failed:', err);
+    if (grid) {
+      grid.innerHTML = `<div style="text-align:center;padding:80px 20px;color:var(--text3);">
+        <div style="font-size:32px;margin-bottom:12px;">⚠️</div>
+        <div style="font-size:14px;margin-bottom:6px;">Couldn't load the shop right now.</div>
+        <div style="font-size:12px;"><a href="javascript:location.reload()" style="color:var(--gold);">Tap to retry</a></div>
+      </div>`;
+    }
+    ALL_PRODUCTS = [];
+  }
+  applyFilters();
+}
+
+// ═══════════════════════════════════════════════════════════
+//  STATE
+// ═══════════════════════════════════════════════════════════
+let filteredProducts = [...ALL_PRODUCTS];
+let activeCat    = 'all';
+let activeType   = 'all';
+let maxPrice     = 16000;
+let searchQuery  = '';
+let sortMode     = 'default';
+let viewMode     = 'grid';
+let currentPage  = 1;
+const PAGE_SIZE  = 48;
+
+// Cart (persisted in localStorage)
+let cart = [];
+try { cart = JSON.parse(localStorage.getItem('kerich_cart')||'[]'); } catch{}
+
+// ═══════════════════════════════════════════════════════════
+//  FILTER & RENDER
+// ═══════════════════════════════════════════════════════════
+function applyFilters() {
+  let res = ALL_PRODUCTS;
+
+  // Category
+  if (activeCat !== 'all') res = res.filter(p => p.cat === activeCat);
+  // Type
+  if (activeType !== 'all') res = res.filter(p => p.type === activeType);
+  // Price
+  res = res.filter(p => p.price <= maxPrice);
+  // Search
+  if (searchQuery) {
+    const q = searchQuery.toLowerCase();
+    res = res.filter(p => p.name.toLowerCase().includes(q) || p.cat.toLowerCase().includes(q) || (p.rawCat||'').toLowerCase().includes(q) || (p.sku||'').toLowerCase().includes(q));
+  }
+  // Sort
+  if (sortMode === 'price-asc')  res = [...res].sort((a,b) => a.price - b.price);
+  if (sortMode === 'price-desc') res = [...res].sort((a,b) => b.price - a.price);
+  if (sortMode === 'name-asc')   res = [...res].sort((a,b) => a.name.localeCompare(b.name));
+
+  filteredProducts = res;
+  currentPage = 1;
+  renderProducts();
+  renderPagination();
+  updateCounts();
+}
+
+function renderProducts() {
+  const container = document.getElementById('products-container');
+  const start = (currentPage - 1) * PAGE_SIZE;
+  const page  = filteredProducts.slice(start, start + PAGE_SIZE);
+
+  document.getElementById('result-count').innerHTML =
+    `Showing <strong>${filteredProducts.length.toLocaleString()}</strong> of <strong>${ALL_PRODUCTS.length.toLocaleString()}</strong> products`;
+
+  if (!page.length) {
+    container.innerHTML = `<div style="text-align:center;padding:80px 20px;color:var(--text3);">
+      <div style="font-size:48px;margin-bottom:16px;">🔍</div>
+      <div style="font-size:16px;margin-bottom:8px;">No products found</div>
+      <div style="font-size:13px;">Try adjusting your filters or search term</div>
+    </div>`;
+    return;
+  }
+
+  if (viewMode === 'grid') {
+    container.innerHTML = `<div class="products-grid">${page.map((p,i) => productCardHTML(p, start+i)).join('')}</div>`;
+  } else {
+    container.innerHTML = `<div class="products-list">${page.map((p,i) => productListHTML(p, start+i)).join('')}</div>`;
+  }
+}
+
+function productCardHTML(p, idx) {
+  const badgeCls = p.type==='rx' ? 'badge-rx' : 'badge-otc';
+  const badgeTxt = p.type.toUpperCase();
+  const imgEl    = window._getImgEl
+    ? window._getImgEl(p, badgeCls, badgeTxt)
+    : `<div class="prod-img"><span style="font-size:42px;">${p.icon||'💊'}</span><div class="${badgeCls}">${badgeTxt}</div></div>`;
+  const detailHref = `/product/${encodeURIComponent(p.sku||'')}`;
+  return `<div class="prod-card">
+    ${imgEl}
+    <div class="prod-body">
+      <a href="${detailHref}" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;" title="View product details">
+        <div class="prod-name">${escHtml(p.name)}</div>
+      </a>
+      <div class="prod-cat">${escHtml(p.rawCat||p.cat)}</div>
+      <div class="prod-footer">
+        <div class="prod-price">KES ${p.price.toLocaleString()}</div>
+        <button class="add-btn" onclick="addToCart(${idx})" title="Add to cart">+</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+function productListHTML(p, idx) {
+  const detailHref = `/product/${encodeURIComponent(p.sku||'')}`;
+  return `<div class="prod-card-list">
+    <div class="prod-list-icon">${_getListImgEl(p)}</div>
+    <div class="prod-list-info">
+      <a href="${detailHref}" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;" title="View product details">
+        <div class="prod-list-name">${escHtml(p.name)}</div>
+      </a>
+      <div class="prod-list-cat">${escHtml(p.rawCat||p.cat)} · <span style="color:${p.type==='rx'?'#F09595':'#5DCAA5'}">${p.type.toUpperCase()}</span></div>
+    </div>
+    <div class="prod-list-right">
+      <div class="prod-list-price">KES ${p.price.toLocaleString()}</div>
+      <button class="add-btn" onclick="addToCart(${idx})">+</button>
+    </div>
+  </div>`;
+}
+
+function _getListImgEl(p) {
+  const icon = p.icon || '💊';
+  if (p.image) {
+    const safeUrl  = escHtml(p.image);
+    const safeName = escHtml(p.name || '');
+    return `<img src="${safeUrl}" alt="${safeName}" loading="lazy" decoding="async"
+      style="width:100%;height:100%;object-fit:cover;border-radius:inherit;"
+      onerror="handleImgError(this,'${icon}')">`;
+  }
+  return icon;
+}
+
+function renderPagination() {
+  const total = Math.ceil(filteredProducts.length / PAGE_SIZE);
+  const pag   = document.getElementById('pagination');
+  if (total <= 1) { pag.innerHTML=''; return; }
+
+  let html = `<button class="pag-btn" onclick="goPage(${currentPage-1})" ${currentPage===1?'disabled':''}>‹</button>`;
+  const pages = pagRange(currentPage, total);
+  pages.forEach(p => {
+    if (p === '…') html += `<span class="pag-info">…</span>`;
+    else html += `<button class="pag-btn ${p===currentPage?'active':''}" onclick="goPage(${p})">${p}</button>`;
+  });
+  html += `<button class="pag-btn" onclick="goPage(${currentPage+1})" ${currentPage===total?'disabled':''}>›</button>`;
+  html += `<span class="pag-info">Page ${currentPage} of ${total}</span>`;
+  pag.innerHTML = html;
+}
+
+function pagRange(cur, total) {
+  if (total <= 7) return Array.from({length:total},(_,i)=>i+1);
+  if (cur <= 4)   return [1,2,3,4,5,'…',total];
+  if (cur >= total-3) return [1,'…',total-4,total-3,total-2,total-1,total];
+  return [1,'…',cur-1,cur,cur+1,'…',total];
+}
+
+function goPage(n) {
+  const total = Math.ceil(filteredProducts.length / PAGE_SIZE);
+  if (n < 1 || n > total) return;
+  currentPage = n;
+  renderProducts();
+  renderPagination();
+  window.scrollTo({top:60,behavior:'smooth'});
+}
+
+function updateCounts() {
+  // Update all category count badges
+  const counts = {};
+  ALL_PRODUCTS.forEach(p => { counts[p.cat] = (counts[p.cat]||0)+1; });
+  document.querySelectorAll('.cat-count').forEach(el => {
+    if (el.id === 'count-all') { el.textContent = ALL_PRODUCTS.length.toLocaleString(); return; }
+    const cat = el.id.replace('count-','').replace(/_/g,' ').replace('and','&');
+    // Try to find matching category
+    const found = Object.keys(counts).find(c => c.replace(/[^a-z]/gi,'').toLowerCase() === cat.replace(/[^a-z]/gi,'').toLowerCase());
+    el.textContent = found ? counts[found].toLocaleString() : '';
+  });
+}
+
+// ═══════════════════════════════════════════════════════════
+//  EVENT HANDLERS
+// ═══════════════════════════════════════════════════════════
+function filterCat(el, cat) {
+  document.querySelectorAll('.filter-item').forEach(f=>f.classList.remove('active'));
+  el.classList.add('active');
+  activeCat = cat;
+  applyFilters();
+  updateUrlState();
+}
+
+function setType(el, type) {
+  document.querySelectorAll('.type-btn').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+  activeType = type;
+  applyFilters();
+}
+
+function onPriceChange(el) {
+  maxPrice = parseInt(el.value);
+  document.getElementById('price-max-label').textContent = 'KES '+maxPrice.toLocaleString();
+  applyFilters();
+}
+
+let searchTimeout;
+function onSearch() {
+  clearTimeout(searchTimeout);
+  searchTimeout = setTimeout(() => {
+    searchQuery = document.getElementById('search-input').value.trim();
+    applyFilters();
+    updateUrlState();
+  }, 220);
+}
+
+function updateUrlState() {
+  const params = new URLSearchParams();
+  if (searchQuery) params.set('search', searchQuery);
+  if (activeCat && activeCat !== 'all') params.set('category', activeCat);
+  const qs = params.toString();
+  const newUrl = location.pathname + (qs ? '?' + qs : '');
+  history.replaceState(null, '', newUrl);
+}
+
+function applySort() {
+  sortMode = document.getElementById('sort-select').value;
+  applyFilters();
+}
+
+function setView(mode) {
+  viewMode = mode;
+  document.getElementById('view-grid').classList.toggle('active', mode==='grid');
+  document.getElementById('view-list').classList.toggle('active', mode==='list');
+  renderProducts();
+}
+
+// ═══════════════════════════════════════════════════════════
+//  CART
+// ═══════════════════════════════════════════════════════════
+function getPageProduct(idx) {
+  const start = (currentPage-1)*PAGE_SIZE;
+  return filteredProducts[start+idx];
+}
+
+// addToCart uses absolute index into filteredProducts
+function addToCart(relIdx) {
+  const p = getPageProduct(relIdx);
+  if (!p) return;
+  const existing = cart.find(c=>c.name===p.name);
+  if (existing) { existing.qty++; }
+  else { cart.push({...p, qty:1}); }
+  saveCart();
+  renderCartBadge();
+  renderCartDrawer();
+  toast(p.name.split(' ').slice(0,4).join(' ')+' added to cart','success');
+}
+
+function removeFromCart(idx) {
+  cart.splice(idx,1);
+  saveCart();
+  renderCartBadge();
+  renderCartDrawer();
+}
+
+function changeQty(idx, delta) {
+  cart[idx].qty += delta;
+  if (cart[idx].qty <= 0) cart.splice(idx,1);
+  saveCart();
+  renderCartBadge();
+  renderCartDrawer();
+  updateCoTotal();
+}
+
+function saveCart() {
+  try { localStorage.setItem('kerich_cart', JSON.stringify(cart)); } catch{}
+}
+
+function clearCart() {
+  cart = [];
+  saveCart();
+  renderCartBadge();
+  renderCartDrawer();
+}
+window.clearCart = clearCart;
+window.getCart   = () => cart;
+
+function renderCartBadge() {
+  const total = cart.reduce((s,c)=>s+c.qty,0);
+  const el = document.getElementById('cart-count');
+  if (el) el.textContent = total;
+}
+
+function renderCartDrawer() {
+  const itemsEl  = document.getElementById('cart-items');
+  const footerEl = document.getElementById('cart-footer');
+  if (!cart.length) {
+    itemsEl.innerHTML  = `<div class="empty-cart"><div class="empty-cart-icon">🛒</div><div>Your cart is empty</div></div>`;
+    footerEl.innerHTML = '';
+    return;
+  }
+  itemsEl.innerHTML = cart.map((item,i)=>`
+    <div class="cart-item">
+      <div class="ci-icon">${item.icon||'💊'}</div>
+      <div class="ci-info">
+        <div class="ci-name">${escHtml(item.name)}</div>
+        <div class="ci-price">KES ${item.price.toLocaleString()}</div>
+        <div class="ci-qty">
+          <button class="qty-btn" onclick="changeQty(${i},-1)">−</button>
+          <span class="qty-val">${item.qty}</span>
+          <button class="qty-btn" onclick="changeQty(${i},1)">+</button>
+        </div>
+      </div>
+      <button class="ci-remove" onclick="removeFromCart(${i})" title="Remove">✕</button>
+    </div>`).join('');
+
+  const subtotal  = cart.reduce((s,c)=>s+c.price*c.qty,0);
+  const delivery  = subtotal >= 2000 ? 0 : 150;
+  const total     = subtotal + delivery;
+
+  footerEl.innerHTML = `
+    <div class="cart-summary">
+      <div class="cart-sum-row"><span>Subtotal (${cart.reduce((s,c)=>s+c.qty,0)} items)</span><span>KES ${subtotal.toLocaleString()}</span></div>
+      <div class="cart-sum-row"><span>Delivery</span><span>${delivery===0?'<span style="color:#5DCAA5;">FREE</span>':'KES 150'}</span></div>
+      ${delivery>0?`<div style="font-size:11px;color:var(--text3);margin-bottom:8px;">Add KES ${(2000-subtotal).toLocaleString()} more for free delivery</div>`:''}
+      <div class="cart-sum-row" style="border-top:1px solid rgba(201,168,76,0.1);padding-top:8px;margin-top:4px;">
+        <span style="font-weight:600;color:var(--text);">Total</span>
+        <span class="cart-total">KES ${total.toLocaleString()}</span>
+      </div>
+    </div>
+    <button class="checkout-btn" onclick="openCheckout()">Proceed to Checkout</button>
+    <div class="cart-note">🔒 Secure checkout · M-Pesa · Visa · Insurance</div>`;
+}
+
+function openCart()  { document.getElementById('cart-overlay').classList.add('open'); document.getElementById('cart-drawer').classList.add('open'); renderCartDrawer(); }
+function closeCart() { document.getElementById('cart-overlay').classList.remove('open'); document.getElementById('cart-drawer').classList.remove('open'); }
+
+// ═══════════════════════════════════════════════════════════
+//  MODAL
+// ═══════════════════════════════════════════════════════════
+function showModal(view) {
+  // If showing login/register but user is already signed in → go to checkout
+  if ((view === 'login' || view === 'register') && window._shopUser) {
+    view = 'checkout';
+    populateCheckoutSync(window._shopUser);
+  }
+  document.getElementById('modal-bg').classList.add('open');
+  ['login','register','checkout','success'].forEach(v => {
+    const el = document.getElementById('modal-'+v);
+    if (el) el.classList.toggle('hidden', v!==view);
+  });
+  if (view === 'checkout') updateCoTotal();
+}
+
+function openCheckout() {
+  closeCart();
+  if (window._shopUser) {
+    // Already signed in → go straight to checkout and populate user info
+    populateCheckoutSync(window._shopUser);
+    showModal('checkout');
+  } else {
+    // Not signed in → show login, flag that checkout was intent
+    window._pendingCheckout = true;
+    showModal('login');
+  }
+}
+
+// Lightweight sync version called from non-module context
+function populateCheckoutSync(user) {
+  const strip   = document.getElementById('co-user-strip');
+  const avEl    = document.getElementById('co-user-av');
+  const nameEl  = document.getElementById('co-user-name');
+  const emailEl = document.getElementById('co-user-email');
+  if (!strip) return;
+  const init = (user.displayName||user.email||'U').split(' ').map(w=>w[0]).slice(0,2).join('').toUpperCase();
+  if(avEl)    avEl.textContent    = init;
+  if(nameEl)  nameEl.textContent  = user.displayName || user.email.split('@')[0];
+  if(emailEl) emailEl.textContent = user.email;
+  strip.style.display = 'flex';
+}
+
+function closeModal() { document.getElementById('modal-bg').classList.remove('open'); }
+
+function selectPay(el, method) {
+  document.querySelectorAll('.pay-opt').forEach(e=>e.classList.remove('active'));
+  el.classList.add('active');
+}
+
+function updateCoTotal() {
+  const subtotal = cart.reduce((s,c)=>s+c.price*c.qty,0);
+  const delivery = subtotal >= 2000 ? 0 : 150;
+  const total    = subtotal + delivery;
+  const el = document.getElementById('co-total-display');
+  if (!el) return;
+  el.innerHTML = `
+    <div style="display:flex;justify-content:space-between;margin-bottom:4px;"><span>Subtotal</span><span>KES ${subtotal.toLocaleString()}</span></div>
+    <div style="display:flex;justify-content:space-between;margin-bottom:4px;"><span>Delivery</span><span>${delivery===0?'<span style="color:#5DCAA5;">FREE</span>':'KES 150'}</span></div>
+    <div style="display:flex;justify-content:space-between;font-weight:600;color:var(--text);border-top:1px solid rgba(201,168,76,0.1);padding-top:8px;margin-top:4px;"><span>Total</span><span style="color:#C9A84C;font-family:'Cormorant Garamond',serif;font-size:18px;">KES ${total.toLocaleString()}</span></div>`;
+}
+
+// Close modal on backdrop
+document.getElementById('modal-bg').addEventListener('click', e => { if (e.target===e.currentTarget) closeModal(); });
+
+// ═══════════════════════════════════════════════════════════
+//  UTILITIES
+// ═══════════════════════════════════════════════════════════
+function escHtml(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function toast(msg, type='info') {
+  const c = document.getElementById('toast-container');
+  const t = document.createElement('div');
+  t.className = 'toast '+type;
+  t.textContent = msg;
+  c.appendChild(t);
+  setTimeout(() => { t.style.opacity='0'; t.style.transition='opacity .3s'; setTimeout(()=>t.remove(),300); }, 3200);
+}
+window.toast = toast;
+
+// ═══════════════════════════════════════════════════════════
+//  INIT
+// ═══════════════════════════════════════════════════════════
+// Read ?search= from the URL so search results are shareable/bookmarkable
+// (also what makes a real SearchAction structured-data entry meaningful —
+// the URL template it declares actually has to work when visited).
+const _urlParams = new URLSearchParams(location.search);
+const _urlSearch  = _urlParams.get('search');
+if (_urlSearch) {
+  searchQuery = _urlSearch.trim();
+  const searchInput = document.getElementById('search-input');
+  if (searchInput) searchInput.value = searchQuery;
+}
+const _urlCat = _urlParams.get('category');
+if (_urlCat) {
+  activeCat = _urlCat;
+  const matchBtn = document.querySelector(`.filter-item[onclick*="'${_urlCat}'"]`);
+  if (matchBtn) {
+    document.querySelectorAll('.filter-item').forEach(f=>f.classList.remove('active'));
+    matchBtn.classList.add('active');
+  }
+}
+
+loadProducts();
+loadPromoConfig();
+renderCartBadge();
+
+// Keyboard shortcut: / focuses search
+document.addEventListener('keydown', e => {
+  if (e.key === '/' && document.activeElement.tagName !== 'INPUT') {
+    e.preventDefault(); document.getElementById('search-input').focus();
+  }
+  if (e.key === 'Escape') { closeModal(); closeCart(); }
+});
+</script>
+
+
+<!-- ══ LOCATION PICKER MODAL ══ -->
+<div id="loc-modal">
+  <div id="loc-modal-box">
+    <div id="loc-modal-hdr">
+      <h3>📍 Set Delivery Location</h3>
+      <button onclick="closeLocPicker()" style="background:transparent;border:none;color:var(--text2);font-size:20px;cursor:pointer;line-height:1;">✕</button>
+    </div>
+    <div id="loc-map"></div>
+    <div id="loc-bottom">
+      <!-- GPS button -->
+      <button class="loc-my-btn" id="loc-gps-btn" onclick="useMyLocation()">
+        <span id="loc-gps-icon">📡</span>
+        <span id="loc-gps-txt">Use my current location</span>
+      </button>
+      <!-- Address display -->
+      <div class="loc-address-bar">
+        <span style="font-size:18px;flex-shrink:0;">📍</span>
+        <span class="loc-address-txt" id="loc-address-txt">Drag the pin or tap to pick location</span>
+      </div>
+      <!-- Manual input -->
+      <div class="loc-input-wrap">
+        <input class="loc-input" id="loc-manual-input" type="text" placeholder="Or type your address manually…" oninput="onManualInput()">
+      </div>
+      <!-- Quick area selector -->
+      <div class="loc-quick-label">Popular areas in Nairobi</div>
+      <div class="loc-quick-grid" id="loc-quick-grid"></div>
+      <!-- Confirm -->
+      <button class="loc-confirm-btn" onclick="confirmLocation()">✓ Confirm This Location</button>
+    </div>
+  </div>
+</div>
+
+<!-- Leaflet CSS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+<script>
+// ═══════════════════════════════════════════════════════════
+//  LOCATION PICKER (Glovo/Uber style — Leaflet + Nominatim)
+// ═══════════════════════════════════════════════════════════
+const NAIROBI_AREAS = [
+  { name:'Westlands',    lat:-1.2681, lng:36.8093 },
+  { name:'Kilimani',     lat:-1.2892, lng:36.7822 },
+  { name:'CBD',          lat:-1.2841, lng:36.8155 },
+  { name:'Lavington',    lat:-1.2820, lng:36.7667 },
+  { name:'Parklands',    lat:-1.2561, lng:36.8150 },
+  { name:'Karen',        lat:-1.3213, lng:36.7141 },
+  { name:'Muthaiga',     lat:-1.2453, lng:36.8194 },
+  { name:'Runda',        lat:-1.2126, lng:36.7985 },
+  { name:'Gigiri',       lat:-1.2310, lng:36.8063 },
+  { name:'Hurlingham',   lat:-1.2967, lng:36.7891 },
+  { name:'Langata',      lat:-1.3435, lng:36.7502 },
+  { name:'Upperhill',    lat:-1.2941, lng:36.8128 },
+  { name:'Kasarani',     lat:-1.2204, lng:36.8986 },
+  { name:'Eastleigh',    lat:-1.2730, lng:36.8449 },
+  { name:'South B',      lat:-1.3168, lng:36.8248 },
+  { name:'South C',      lat:-1.3216, lng:36.8095 },
+  { name:'Ngong Road',   lat:-1.3030, lng:36.7729 },
+  { name:'Spring Valley',lat:-1.2608, lng:36.7812 },
+];
+
+let _locMap      = null;
+let _locMarker   = null;
+let _locLat      = -1.2921; // Nairobi centre
+let _locLng      = 36.8219;
+let _locAddress  = '';
+let _geocodeTimer = null;
+
+function openLocPicker() {
+  document.getElementById('loc-modal').style.display='flex';
+  document.getElementById('loc-modal').classList.add('open');
+  // Render quick area buttons
+  const grid = document.getElementById('loc-quick-grid');
+  grid.innerHTML = NAIROBI_AREAS.map(a =>
+    `<button class="loc-quick-btn" onclick="jumpToArea(${a.lat},${a.lng},'${a.name}')">${a.name}</button>`
+  ).join('');
+
+  // Init map after modal is visible
+  setTimeout(() => {
+    if (!_locMap) {
+      // Preload Leaflet JS if needed
+      if (!window.L) {
+        const s = document.createElement('script');
+        s.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+        s.onload = initLeafletMap;
+        document.head.appendChild(s);
+      } else {
+        initLeafletMap();
+      }
+    } else {
+      _locMap.invalidateSize();
+    }
+  }, 120);
+}
+
+function initLeafletMap() {
+  const L = window.L;
+  _locMap = L.map('loc-map', { zoomControl:true, attributionControl:false }).setView([_locLat, _locLng], 14);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom:19,
+    attribution:'© OpenStreetMap'
+  }).addTo(_locMap);
+
+  // Custom gold marker
+  const icon = L.divIcon({
+    className: '',
+    html: `<div style="width:36px;height:36px;background:linear-gradient(135deg,#C9A84C,#8B6914);border-radius:50% 50% 50% 0;transform:rotate(-45deg);border:3px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,0.4);"></div>`,
+    iconSize: [36,36],
+    iconAnchor: [18,36]
+  });
+
+  _locMarker = L.marker([_locLat, _locLng], { icon, draggable:true }).addTo(_locMap);
+
+  _locMarker.on('dragend', e => {
+    const pos = e.target.getLatLng();
+    updateLocation(pos.lat, pos.lng);
+  });
+
+  _locMap.on('click', e => {
+    _locMarker.setLatLng(e.latlng);
+    updateLocation(e.latlng.lat, e.latlng.lng);
+  });
+
+  // Try to use current known address
+  const existingAddr = document.getElementById('co-address')?.value;
+  if (existingAddr) {
+    document.getElementById('loc-address-txt').textContent = existingAddr;
+  }
+}
+
+function updateLocation(lat, lng) {
+  _locLat = lat;
+  _locLng = lng;
+  document.getElementById('loc-address-txt').textContent = '🔍 Getting address…';
+  clearTimeout(_geocodeTimer);
+  _geocodeTimer = setTimeout(() => reverseGeocode(lat, lng), 600);
+}
+
+async function reverseGeocode(lat, lng) {
+  try {
+    const r = await fetch(
+      `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json&addressdetails=1&accept-language=en`,
+      { headers: { 'User-Agent': 'KerichPharmaceuticals/1.0' } }
+    );
+    const data = await r.json();
+    const a = data.address || {};
+    const parts = [
+      a.road || a.pedestrian || a.footway || '',
+      a.suburb || a.neighbourhood || a.quarter || '',
+      a.city_district || a.county || '',
+      a.city || a.town || 'Nairobi'
+    ].filter(Boolean);
+    _locAddress = parts.join(', ');
+    document.getElementById('loc-address-txt').textContent = _locAddress || `${lat.toFixed(5)}, ${lng.toFixed(5)}`;
+  } catch {
+    _locAddress = `Near ${lat.toFixed(4)}, ${lng.toFixed(4)}`;
+    document.getElementById('loc-address-txt').textContent = _locAddress;
+  }
+}
+
+function jumpToArea(lat, lng, name) {
+  if (!_locMap) return;
+  document.querySelectorAll('.loc-quick-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  _locMap.setView([lat, lng], 15);
+  _locMarker.setLatLng([lat, lng]);
+  updateLocation(lat, lng);
+}
+
+function useMyLocation() {
+  const btn = document.getElementById('loc-gps-btn');
+  const txt = document.getElementById('loc-gps-txt');
+  const ico = document.getElementById('loc-gps-icon');
+  if (!navigator.geolocation) { toast('Geolocation not supported by your browser.','error'); return; }
+  txt.textContent = 'Getting location…';
+  ico.innerHTML = '<span class="loc-spinner"></span>';
+  btn.disabled = true;
+  navigator.geolocation.getCurrentPosition(
+    pos => {
+      const { latitude:lat, longitude:lng } = pos.coords;
+      if (_locMap) {
+        _locMap.setView([lat, lng], 16);
+        _locMarker.setLatLng([lat, lng]);
+      }
+      updateLocation(lat, lng);
+      txt.textContent = 'Current location found!';
+      ico.textContent = '✅';
+      setTimeout(() => { txt.textContent='Use my current location'; ico.textContent='📡'; btn.disabled=false; }, 2000);
+    },
+    err => {
+      toast('Could not get location. Please pick on the map.','error');
+      txt.textContent='Use my current location'; ico.textContent='📡'; btn.disabled=false;
+    },
+    { enableHighAccuracy:true, timeout:10000, maximumAge:0 }
+  );
+}
+
+let _manualTimer;
+function onManualInput() {
+  const val = document.getElementById('loc-manual-input').value.trim();
+  if (val.length < 3) return;
+  clearTimeout(_manualTimer);
+  _manualTimer = setTimeout(async () => {
+    try {
+      const r = await fetch(
+        `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(val+' Nairobi Kenya')}&format=json&limit=3&accept-language=en`,
+        { headers:{'User-Agent':'KerichPharmaceuticals/1.0'} }
+      );
+      const results = await r.json();
+      if (results.length && _locMap) {
+        const { lat, lon } = results[0];
+        const la = parseFloat(lat), ln = parseFloat(lon);
+        _locMap.setView([la, ln], 16);
+        _locMarker.setLatLng([la, ln]);
+        updateLocation(la, ln);
+      }
+    } catch {}
+  }, 700);
+}
+
+function confirmLocation() {
+  const addrEl = document.getElementById('co-address');
+  const latEl  = document.getElementById('co-lat');
+  const lngEl  = document.getElementById('co-lng');
+  const detEl  = document.getElementById('co-address-detail');
+  if (addrEl) addrEl.value = _locAddress || `${_locLat.toFixed(5)}, ${_locLng.toFixed(5)}`;
+  if (latEl)  latEl.value  = _locLat;
+  if (lngEl)  lngEl.value  = _locLng;
+  if (detEl)  { detEl.style.display='block'; detEl.textContent = `📍 ${_locLat.toFixed(5)}, ${_locLng.toFixed(5)}`; }
+  closeLocPicker();
+  toast('Delivery location set!','success');
+}
+
+function closeLocPicker() {
+  document.getElementById('loc-modal').style.display='none';
+  document.getElementById('loc-modal').classList.remove('open');
+}
+
+window.openLocPicker  = openLocPicker;
+window.closeLocPicker = closeLocPicker;
+window.confirmLocation= confirmLocation;
+window.useMyLocation  = useMyLocation;
+window.onManualInput  = onManualInput;
+window.jumpToArea     = jumpToArea;
+</script>
+
+<script>
+// Real catalog photos come straight from Firestore (p.image), sourced from
+// the pharmacy's actual inventory feed. Uses the browser's native
+// loading="lazy" instead of custom IntersectionObserver/MutationObserver
+// wiring — simpler, and images render as soon as they're built into the
+// card HTML rather than depending on an observer catching the DOM change.
+// If a photo URL 404s or fails for any reason, handleImgError swaps it
+// for the category emoji without disturbing the price badge.
+
+window.handleImgError = function(imgEl, icon) {
+  imgEl.onerror = null; // prevent any retry loop
+  imgEl.style.display = 'none';
+  const span = document.createElement('span');
+  span.className = 'prod-img-emoji';
+  span.textContent = icon || '💊';
+  imgEl.parentElement.insertBefore(span, imgEl);
+};
+
+window._getImgEl = function(p, badgeCls, badgeTxt) {
+  const icon = p.icon || '💊';
+  if (p.image) {
+    const safeUrl  = escHtml(p.image);
+    const safeName = escHtml(p.name || '');
+    return `<div class="prod-img">
+      <img src="${safeUrl}" alt="${safeName}" loading="lazy" decoding="async" class="prod-img-photo"
+           onerror="handleImgError(this,'${icon}')">
+      <div class="${badgeCls}">${badgeTxt}</div>
+    </div>`;
+  }
+  return `<div class="prod-img"><span class="prod-img-emoji">${icon}</span><div class="${badgeCls}">${badgeTxt}</div></div>`;
+};
+</script>
+
+</body>
+</html>

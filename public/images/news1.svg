@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 300" width="600" height="300" role="img" aria-label="Vaccine vial and syringe illustration representing malaria vaccine expansion">
+  <defs>
+    <linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1C1C2A"/>
+      <stop offset="100%" stop-color="#111118"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="300" fill="url(#bg1)"/>
+  <circle cx="500" cy="60" r="90" fill="#C9A84C" opacity="0.06"/>
+  <circle cx="70" cy="250" r="70" fill="#C9A84C" opacity="0.05"/>
+  <!-- vial -->
+  <g transform="translate(230,60)">
+    <rect x="0" y="30" width="70" height="130" rx="8" fill="#22223A" stroke="#C9A84C" stroke-width="2.5"/>
+    <rect x="10" y="60" width="50" height="90" fill="#C9A84C" opacity="0.18"/>
+    <rect x="18" y="0" width="34" height="34" rx="4" fill="#C9A84C"/>
+    <rect x="8" y="26" width="54" height="10" rx="3" fill="#0A0A0F"/>
+    <line x1="14" y1="80" x2="56" y2="80" stroke="#C9A84C" stroke-width="1.5" opacity="0.6"/>
+    <line x1="14" y1="100" x2="56" y2="100" stroke="#C9A84C" stroke-width="1.5" opacity="0.6"/>
+    <line x1="14" y1="120" x2="56" y2="120" stroke="#C9A84C" stroke-width="1.5" opacity="0.6"/>
+  </g>
+  <!-- syringe -->
+  <g transform="translate(330,110) rotate(-30)">
+    <rect x="0" y="0" width="140" height="26" rx="6" fill="#22223A" stroke="#C9A84C" stroke-width="2"/>
+    <rect x="10" y="6" width="90" height="14" fill="#C9A84C" opacity="0.25"/>
+    <rect x="140" y="8" width="40" height="10" fill="#C9A84C"/>
+    <rect x="-18" y="4" width="18" height="18" fill="#22223A" stroke="#C9A84C" stroke-width="2"/>
+  </g>
+  <text x="40" y="255" font-family="Georgia, serif" font-size="26" fill="#F5F0E8" opacity="0.85">Immunization &amp; Prevention</text>
+</svg>

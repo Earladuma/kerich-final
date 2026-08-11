@@ -1,0 +1,141 @@
+/* ═══════════════════════════════════════════════════════════
+   ACCESSIBILITY — shared across every page (public/js/accessibility.js
+   injects the button/panel markup; this file styles it and defines the
+   light-theme variable overrides).
+
+   Font/UI size uses CSS `zoom` rather than a text-only rem scale — this
+   codebase is built almost entirely with fixed px values, not rem, so a
+   root font-size change wouldn't cascade to most text at all. `zoom`
+   scales the whole layout (text, buttons, spacing) together, which is
+   both honest about how it actually works and arguably more useful for
+   low-vision users than text-only scaling. Supported in Chrome, Edge,
+   Safari, and Firefox (126+, 2024) — i.e. every evergreen browser as of
+   this build.
+   ═══════════════════════════════════════════════════════════ */
+
+html[data-a11y-scale="0.9"]  { zoom: 0.9; }
+html[data-a11y-scale="1.1"]  { zoom: 1.1; }
+html[data-a11y-scale="1.25"] { zoom: 1.25; }
+html[data-a11y-scale="1.5"]  { zoom: 1.5; }
+
+html.a11y-reduce-motion, html.a11y-reduce-motion * {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+  scroll-behavior: auto !important;
+}
+
+/* ── Light theme — overrides whatever :root defines per-page.
+   Uses an element+attribute selector so its specificity beats a bare
+   :root rule regardless of source order (both are otherwise equal
+   specificity, and this file loads at a different point on every page). */
+html[data-theme="light"] {
+  --dark:        #F7F5EF;
+  --dark2:       #FFFFFF;
+  --dark3:       #EFEAE0;
+  --dark4:       #DED6C4;
+  --surface:     #FFFFFF;
+  --surface2:    #F5F1E8;
+  --text:        #1A1610;
+  --text2:       #4A4438;
+  --text3:       #7A7264;
+  --gold:        #A8823A;
+  --gold-dark:   #7A5E22;
+  --gold-light:  #C9A050;
+  --success:     #178F68;
+  --danger:      #C93433;
+  --info:        #2A6FB5;
+  --warn:        #9C6112;
+}
+html[data-theme="light"] body { background: var(--dark); color: var(--text); }
+/* A few pages hardcode #0A0A0F / near-black backgrounds directly on
+   specific elements rather than via var(--dark) — this catches those
+   without needing to track down every occurrence individually. */
+html[data-theme="light"] body,
+html[data-theme="light"] .modal-box,
+html[data-theme="light"] .card,
+html[data-theme="light"] header,
+html[data-theme="light"] nav {
+  color-scheme: light;
+}
+
+/* ── Floating toggle button ── */
+#a11y-toggle-btn {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: #C9A84C;
+  color: #1A1200;
+  border: none;
+  font-size: 21px;
+  cursor: pointer;
+  z-index: 99998;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.15s;
+}
+#a11y-toggle-btn:hover { transform: scale(1.08); }
+#a11y-toggle-btn:focus-visible { outline: 3px solid #5DCAA5; outline-offset: 2px; }
+
+#a11y-panel {
+  position: fixed;
+  bottom: 80px;
+  left: 20px;
+  width: 260px;
+  background: #1C1C2A;
+  border: 1px solid rgba(201,168,76,0.25);
+  border-radius: 14px;
+  padding: 18px;
+  z-index: 99999;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+  font-family: 'DM Sans', Arial, sans-serif;
+  color: #F5F0E8;
+  display: none;
+}
+html[data-theme="light"] #a11y-panel { background: #FFFFFF; color: #1A1610; border-color: rgba(168,130,58,0.3); }
+#a11y-panel.open { display: block; }
+#a11y-panel h3 { font-size: 13px; font-weight: 600; margin: 0 0 14px; color: #C9A84C; }
+.a11y-row { margin-bottom: 14px; }
+.a11y-row:last-child { margin-bottom: 0; }
+.a11y-label { font-size: 11px; color: #B8B0A0; margin-bottom: 6px; display: block; }
+html[data-theme="light"] .a11y-label { color: #4A4438; }
+.a11y-btn-group { display: flex; gap: 6px; }
+.a11y-btn {
+  flex: 1;
+  padding: 8px 6px;
+  border-radius: 7px;
+  border: 1px solid rgba(201,168,76,0.25);
+  background: rgba(201,168,76,0.06);
+  color: inherit;
+  font-size: 12px;
+  cursor: pointer;
+  font-family: inherit;
+  text-align: center;
+}
+.a11y-btn.active { background: #C9A84C; color: #1A1200; border-color: #C9A84C; font-weight: 600; }
+.a11y-btn:focus-visible { outline: 2px solid #5DCAA5; outline-offset: 1px; }
+.a11y-toggle-row { display: flex; justify-content: space-between; align-items: center; }
+.a11y-switch {
+  width: 38px; height: 22px; border-radius: 12px; background: rgba(255,255,255,0.15);
+  border: none; cursor: pointer; position: relative; flex-shrink: 0;
+}
+.a11y-switch.on { background: #C9A84C; }
+.a11y-switch::after {
+  content: ''; position: absolute; top: 2px; left: 2px; width: 18px; height: 18px;
+  border-radius: 50%; background: #fff; transition: transform 0.15s;
+}
+.a11y-switch.on::after { transform: translateX(16px); }
+#a11y-reset-btn {
+  width: 100%; margin-top: 4px; padding: 7px; border-radius: 7px; border: 1px solid rgba(255,255,255,0.15);
+  background: transparent; color: #B8B0A0; font-size: 11px; cursor: pointer; font-family: inherit;
+}
+html[data-theme="light"] #a11y-reset-btn { color: #7A7264; border-color: rgba(0,0,0,0.12); }
+
+@media (max-width: 480px) {
+  #a11y-panel { width: calc(100vw - 40px); }
+}

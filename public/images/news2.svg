@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 300" width="600" height="300" role="img" aria-label="Weather and virus particle illustration representing flu season alert">
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1C1C2A"/>
+      <stop offset="100%" stop-color="#111118"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="300" fill="url(#bg2)"/>
+  <circle cx="90" cy="70" r="80" fill="#C9A84C" opacity="0.06"/>
+  <circle cx="520" cy="230" r="100" fill="#C9A84C" opacity="0.05"/>
+  <!-- virus particle -->
+  <g transform="translate(300,140)">
+    <circle r="55" fill="#22223A" stroke="#C9A84C" stroke-width="2.5"/>
+    <circle r="55" fill="#C9A84C" opacity="0.08"/>
+    <g stroke="#C9A84C" stroke-width="3">
+      <line x1="0" y1="-55" x2="0" y2="-75"/>
+      <line x1="0" y1="55" x2="0" y2="75"/>
+      <line x1="-55" y1="0" x2="-75" y2="0"/>
+      <line x1="55" y1="0" x2="75" y2="0"/>
+      <line x1="-39" y1="-39" x2="-53" y2="-53"/>
+      <line x1="39" y1="-39" x2="53" y2="-53"/>
+      <line x1="-39" y1="39" x2="-53" y2="53"/>
+      <line x1="39" y1="39" x2="53" y2="53"/>
+    </g>
+    <g fill="#C9A84C">
+      <circle cx="0" cy="-75" r="7"/><circle cx="0" cy="75" r="7"/>
+      <circle cx="-75" cy="0" r="7"/><circle cx="75" cy="0" r="7"/>
+      <circle cx="-53" cy="-53" r="7"/><circle cx="53" cy="-53" r="7"/>
+      <circle cx="-53" cy="53" r="7"/><circle cx="53" cy="53" r="7"/>
+    </g>
+  </g>
+  <!-- droplets -->
+  <g fill="#C9A84C" opacity="0.5">
+    <path d="M120 90 q8 14 0 22 a10 10 0 0 1 -8 -22 Z"/>
+    <path d="M470 80 q8 14 0 22 a10 10 0 0 1 -8 -22 Z"/>
+    <path d="M150 220 q8 14 0 22 a10 10 0 0 1 -8 -22 Z"/>
+  </g>
+  <text x="40" y="255" font-family="Georgia, serif" font-size="26" fill="#F5F0E8" opacity="0.85">Seasonal Illness Watch</text>
+</svg>

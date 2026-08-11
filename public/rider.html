@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Accessibility: theme / text size / reduced motion -->
+<script>
+(function(){
+  try {
+    var t = localStorage.getItem('kerich_theme');
+    if (t) document.documentElement.setAttribute('data-theme', t);
+    var s = localStorage.getItem('kerich_a11y_scale');
+    if (s && s !== '1') document.documentElement.setAttribute('data-a11y-scale', s);
+    if (localStorage.getItem('kerich_reduce_motion') === 'true') document.documentElement.classList.add('a11y-reduce-motion');
+  } catch(e) {}
+})();
+</script>
+<link rel="stylesheet" href="css/accessibility.css">
+<script src="js/accessibility.js" defer></script>
+<title>Rider Portal — Kerich Pharmaceuticals</title>
+<meta name="robots" content="noindex, nofollow">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --gold:#C9A84C;--dark:#0A0A0F;--dark2:#111118;--dark3:#1A1A26;--dark4:#22223A;
+  --surface:#1C1C2A;--text:#F5F0E8;--text2:#B8B0A0;--text3:#7A7468;
+  --success:#1D9E75;--danger:#E24B4A;--radius:12px;
+}
+body{font-family:'DM Sans',sans-serif;background:var(--dark);color:var(--text);min-height:100vh;}
+.hidden{display:none !important;}
+
+#login-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;}
+.login-box{background:var(--surface);border:1px solid rgba(201,168,76,0.15);border-radius:var(--radius);padding:40px 36px;max-width:380px;width:100%;}
+.login-title{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:700;margin-bottom:4px;}
+.login-sub{font-size:13px;color:var(--text3);margin-bottom:24px;}
+.login-box input{width:100%;padding:11px 14px;margin-bottom:12px;border-radius:8px;border:1px solid var(--dark4);background:var(--dark3);color:var(--text);font-size:14px;font-family:inherit;}
+.login-box input:focus{outline:none;border-color:var(--gold);}
+.btn-primary{width:100%;padding:12px;border:none;border-radius:8px;background:var(--gold);color:#1A1200;font-weight:600;font-size:14px;cursor:pointer;font-family:inherit;}
+.btn-primary:disabled{opacity:.6;cursor:default;}
+.login-error{color:var(--danger);font-size:12px;margin-bottom:12px;display:none;}
+
+#portal-screen header{padding:16px 24px;background:var(--dark2);display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(201,168,76,0.1);flex-wrap:wrap;gap:10px;}
+.header-rider{display:flex;align-items:center;gap:10px;}
+.rider-avatar{width:38px;height:38px;border-radius:50%;background:rgba(201,168,76,0.15);color:var(--gold);display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px;}
+.rider-name{font-weight:600;font-size:14px;}
+.rider-sub{font-size:11px;color:var(--text3);}
+.header-actions{display:flex;align-items:center;gap:12px;}
+.loc-toggle{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text2);cursor:pointer;user-select:none;padding:8px 14px;border-radius:8px;border:1px solid rgba(201,168,76,0.2);}
+.loc-toggle.on{border-color:var(--success);color:#5DCAA5;}
+.loc-dot{width:9px;height:9px;border-radius:50%;background:var(--text3);}
+.loc-dot.on{background:var(--success);box-shadow:0 0 0 3px rgba(29,158,117,0.2);}
+.btn-ghost{background:transparent;border:1px solid rgba(201,168,76,0.2);color:var(--text2);padding:8px 14px;border-radius:8px;font-size:12px;cursor:pointer;font-family:inherit;}
+
+.queue{padding:20px 24px;max-width:820px;}
+.delivery-card{background:var(--surface);border:1px solid rgba(201,168,76,0.1);border-radius:var(--radius);padding:16px 18px;margin-bottom:12px;}
+.dc-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:10px;}
+.dc-id{font-weight:600;font-size:14px;}
+.dc-meta{font-size:11px;color:var(--text3);margin-top:2px;}
+.dc-total{font-size:15px;font-weight:600;color:var(--gold);white-space:nowrap;}
+.dc-row{display:flex;align-items:flex-start;gap:8px;font-size:12px;color:var(--text2);margin-bottom:6px;line-height:1.5;}
+.dc-row a{color:var(--gold);text-decoration:underline dotted;}
+.dc-items{font-size:12px;color:var(--text3);margin:8px 0;line-height:1.6;}
+.dc-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;}
+.act-btn{padding:8px 16px;border-radius:6px;border:none;font-size:12px;cursor:pointer;font-family:inherit;font-weight:500;}
+.act-map{background:var(--dark3);color:var(--text2);border:1px solid var(--dark4);text-decoration:none;display:inline-block;}
+.act-complete{background:var(--success);color:#fff;}
+.act-complete:disabled{opacity:.6;cursor:default;}
+.empty-state{text-align:center;padding:60px 20px;color:var(--text3);font-size:13px;}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--surface);border:1px solid rgba(201,168,76,0.2);border-radius:8px;padding:12px 20px;font-size:13px;z-index:999;max-width:90vw;}
+</style>
+</head>
+<body>
+
+<div id="login-screen">
+  <div class="login-box">
+    <div class="login-title">Rider Portal</div>
+    <div class="login-sub">Sign in with your Kerich Pharmaceuticals rider account.</div>
+    <div class="login-error" id="login-error"></div>
+    <input type="email" id="login-email" placeholder="Email" autocomplete="username">
+    <input type="password" id="login-password" placeholder="Password" autocomplete="current-password">
+    <button class="btn-primary" id="login-btn" onclick="doLogin()">Sign In</button>
+  </div>
+</div>
+
+<div id="portal-screen" class="hidden">
+  <header>
+    <div class="header-rider">
+      <div class="rider-avatar" id="rider-avatar">—</div>
+      <div>
+        <div class="rider-name" id="rider-name">—</div>
+        <div class="rider-sub" id="rider-count">0 active deliveries</div>
+      </div>
+    </div>
+    <div class="header-actions">
+      <div class="loc-toggle" id="loc-toggle" onclick="toggleLocationSharing()">
+        <span class="loc-dot" id="loc-dot"></span>
+        <span id="loc-label">Location off</span>
+      </div>
+      <button class="btn-ghost" onclick="doLogout()">Sign Out</button>
+    </div>
+  </header>
+
+  <div class="queue" id="queue">
+    <div class="empty-state">Loading your deliveries…</div>
+  </div>
+</div>
+
+<div id="toast" class="toast hidden"></div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+const cfg = {
+  apiKey:"AIzaSyDkSTdMVyBonlpRWy6xXm-eNpdAG0hJy9s",
+  authDomain:"kerich-4aefa.firebaseapp.com",
+  projectId:"kerich-4aefa",
+  storageBucket:"kerich-4aefa.firebasestorage.app",
+  messagingSenderId:"1065143450049",
+  appId:"1:1065143450049:web:188de865640fe170175740",
+};
+const app  = initializeApp(cfg);
+const auth = getAuth(app);
+
+let currentToken   = null;
+let myDeliveries    = [];
+let watchId          = null;
+let locationSharing  = false;
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.remove('hidden');
+  setTimeout(() => t.classList.add('hidden'), 3200);
+}
+
+window.doLogin = async function() {
+  const email = document.getElementById('login-email').value.trim();
+  const pass  = document.getElementById('login-password').value;
+  const errEl = document.getElementById('login-error');
+  errEl.style.display = 'none';
+  if (!email || !pass) { errEl.textContent = 'Enter your email and password.'; errEl.style.display = 'block'; return; }
+
+  const btn = document.getElementById('login-btn');
+  btn.disabled = true; btn.textContent = 'Signing in…';
+  try {
+    await signInWithEmailAndPassword(auth, email, pass);
+  } catch (err) {
+    errEl.textContent = 'Invalid email or password.';
+    errEl.style.display = 'block';
+    btn.disabled = false; btn.textContent = 'Sign In';
+  }
+};
+
+window.doLogout = function() {
+  stopLocationSharing();
+  signOut(auth);
+};
+
+onAuthStateChanged(auth, async (user) => {
+  const loginScreen  = document.getElementById('login-screen');
+  const portalScreen = document.getElementById('portal-screen');
+  const btn = document.getElementById('login-btn');
+
+  if (!user) {
+    portalScreen.classList.add('hidden');
+    loginScreen.classList.remove('hidden');
+    if (btn) { btn.disabled = false; btn.textContent = 'Sign In'; }
+    return;
+  }
+
+  const tokenResult = await user.getIdTokenResult(true);
+  const role = tokenResult.claims.kerich_role;
+  if (role !== 'rider') {
+    document.getElementById('login-error').textContent =
+      'This account is not registered as a rider. Contact the pharmacy admin.';
+    document.getElementById('login-error').style.display = 'block';
+    await signOut(auth);
+    return;
+  }
+
+  currentToken = tokenResult.token;
+  setInterval(async () => { currentToken = await auth.currentUser.getIdToken(true); }, 50 * 60 * 1000);
+
+  const initials = (user.displayName||'R').split(' ').filter(Boolean).map(w=>w[0]).slice(0,2).join('').toUpperCase();
+  document.getElementById('rider-avatar').textContent = initials;
+  document.getElementById('rider-name').textContent   = user.displayName || user.email;
+
+  loginScreen.classList.add('hidden');
+  portalScreen.classList.remove('hidden');
+  await loadQueue();
+  // Refresh the queue periodically so a newly-assigned delivery shows up
+  // without needing a manual reload.
+  setInterval(loadQueue, 30000);
+});
+
+async function apiFetch(path, opts = {}) {
+  const res = await fetch(path, {
+    ...opts,
+    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${currentToken}`, ...(opts.headers||{}) },
+  });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(data.error || `Request failed (${res.status})`);
+  return data;
+}
+
+async function loadQueue() {
+  try {
+    const data = await apiFetch('/api/delivery');
+    myDeliveries = data.deliveries || [];
+    document.getElementById('rider-count').textContent =
+      `${myDeliveries.length} active ${myDeliveries.length === 1 ? 'delivery' : 'deliveries'}`;
+    renderQueue();
+  } catch (err) {
+    document.getElementById('queue').innerHTML = `<div class="empty-state">Couldn't load your deliveries: ${escHtml(err.message)}</div>`;
+  }
+}
+
+function renderQueue() {
+  const el = document.getElementById('queue');
+  if (!myDeliveries.length) {
+    el.innerHTML = `<div class="empty-state">No active deliveries right now. New assignments will show up here automatically.</div>`;
+    return;
+  }
+  el.innerHTML = myDeliveries.map(cardHtml).join('');
+}
+
+function mapLinks(addr) {
+  if (!addr) return '';
+  const hasCoords = addr.lat && addr.lng;
+  const query = hasCoords ? `${addr.lat},${addr.lng}` : encodeURIComponent([addr.street, addr.city].filter(Boolean).join(', '));
+  if (!query) return '';
+  const mapUrl = hasCoords ? `https://www.google.com/maps?q=${query}` : `https://www.google.com/maps/search/?api=1&query=${query}`;
+  const dirUrl = `https://www.google.com/maps/dir/?api=1&destination=${query}`;
+  return `<a class="act-btn act-map" href="${mapUrl}" target="_blank" rel="noopener noreferrer">🗺 Map</a>
+          <a class="act-btn act-map" href="${dirUrl}" target="_blank" rel="noopener noreferrer">🧭 Navigate</a>`;
+}
+
+function cardHtml(o) {
+  const items = (o.items||[]).map(i => `${i.name} × ${i.quantity}`).join(', ') || '—';
+  const phone = o.patientPhone ? String(o.patientPhone).replace(/[^\d+]/g,'') : null;
+  const eta = o.estimatedETA ? new Date(o.estimatedETA).toLocaleTimeString('en-KE',{hour:'2-digit',minute:'2-digit'}) : null;
+  return `<div class="delivery-card">
+    <div class="dc-top">
+      <div>
+        <div class="dc-id">${escHtml(o.orderId||o.id)}</div>
+        <div class="dc-meta">${o.paymentMethod==='cash'?'💵 Collect cash on delivery':escHtml(o.paymentMethod||'')}${eta?' · ETA '+eta:''}</div>
+      </div>
+      <div class="dc-total">KES ${(o.total||0).toLocaleString()}</div>
+    </div>
+    <div class="dc-row">📍 <span>${escHtml(o.deliveryAddress?.street||'—')}${o.deliveryAddress?.city?', '+escHtml(o.deliveryAddress.city):''}</span></div>
+    ${phone ? `<div class="dc-row">📞 <a href="tel:${phone}">${escHtml(o.patientPhone)}</a></div>` : ''}
+    <div class="dc-items">${escHtml(items)}</div>
+    <div class="dc-actions">
+      ${mapLinks(o.deliveryAddress)}
+      <button class="act-btn act-complete" onclick="markDelivered('${o.id}', this)">✅ Mark Delivered</button>
+    </div>
+  </div>`;
+}
+
+window.markDelivered = async function(orderId, btn) {
+  if (!confirm('Confirm this delivery is complete?')) return;
+  btn.disabled = true; btn.textContent = 'Completing…';
+  try {
+    await apiFetch(`/api/delivery/${orderId}/complete`, { method: 'POST' });
+    showToast('Delivery marked complete.');
+    await loadQueue();
+  } catch (err) {
+    showToast(err.message || 'Could not complete delivery.');
+    btn.disabled = false; btn.textContent = '✅ Mark Delivered';
+  }
+};
+
+// ── Location sharing ─────────────────────────────────────────
+// Broadcasts the rider's current position to every active delivery they
+// have (a delivery doc holds location per-order, not per-rider, so with
+// more than one active delivery the same position is sent to each).
+window.toggleLocationSharing = function() {
+  if (locationSharing) stopLocationSharing();
+  else startLocationSharing();
+};
+
+function startLocationSharing() {
+  if (!navigator.geolocation) { showToast('Location isn\'t available on this device/browser.'); return; }
+  watchId = navigator.geolocation.watchPosition(
+    async (pos) => {
+      const { latitude, longitude } = pos.coords;
+      for (const d of myDeliveries) {
+        try {
+          await apiFetch(`/api/delivery/${d.id}/location`, {
+            method: 'PATCH', body: JSON.stringify({ lat: latitude, lng: longitude }),
+          });
+        } catch { /* best-effort — a single failed update shouldn't stop sharing */ }
+      }
+    },
+    (err) => { showToast('Location error: ' + err.message); stopLocationSharing(); },
+    { enableHighAccuracy: true, maximumAge: 15000, timeout: 20000 }
+  );
+  locationSharing = true;
+  document.getElementById('loc-toggle').classList.add('on');
+  document.getElementById('loc-dot').classList.add('on');
+  document.getElementById('loc-label').textContent = 'Sharing location';
+}
+
+function stopLocationSharing() {
+  if (watchId !== null && navigator.geolocation) navigator.geolocation.clearWatch(watchId);
+  watchId = null;
+  locationSharing = false;
+  document.getElementById('loc-toggle').classList.remove('on');
+  document.getElementById('loc-dot').classList.remove('on');
+  document.getElementById('loc-label').textContent = 'Location off';
+}
+
+function escHtml(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+document.getElementById('login-password').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
+</script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 300" width="600" height="300" role="img" aria-label="Heart rate and healthy lifestyle illustration representing rising lifestyle diseases">
+  <defs>
+    <linearGradient id="bg3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1C1C2A"/>
+      <stop offset="100%" stop-color="#111118"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="300" fill="url(#bg3)"/>
+  <circle cx="530" cy="60" r="85" fill="#C9A84C" opacity="0.06"/>
+  <circle cx="60" cy="240" r="75" fill="#C9A84C" opacity="0.05"/>
+  <!-- heart -->
+  <g transform="translate(255,70)">
+    <path d="M45 90 C10 65 -10 40 -10 15 C-10 -5 8 -15 25 -8 C33 -5 40 2 45 10 C50 2 57 -5 65 -8 C82 -15 100 -5 100 15 C100 40 80 65 45 90 Z"
+          fill="#22223A" stroke="#C9A84C" stroke-width="2.5"/>
+  </g>
+  <!-- ECG line through the heart -->
+  <polyline points="130,145 210,145 230,110 255,175 280,90 300,145 470,145"
+            fill="none" stroke="#C9A84C" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="40" y="255" font-family="Georgia, serif" font-size="26" fill="#F5F0E8" opacity="0.85">Chronic Condition Awareness</text>
+</svg>
